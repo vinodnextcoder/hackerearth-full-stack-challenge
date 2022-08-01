@@ -28,4 +28,12 @@ export class User {
   })
   @Column()
   password: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'User name',
+    example: 'sample',
+  })
+  @Column()
+  name: string;
 }

@@ -20,4 +20,13 @@ export class AuthCredentialsDto {
     example: 'SamplePassword123',
   })
   password: string;
+
+  @ApiProperty({
+    type: string,
+    description: 'name',
+    example: 'test',
+  })
+  name: string;
+
+
 }
