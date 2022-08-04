@@ -1,6 +1,7 @@
 import { string } from '@hapi/joi';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, Length } from 'class-validator';
+import { CreateDateColumn,UpdateDateColumn  } from 'typeorm';
 
 export class AuthCredentialsDto {
   @IsNotEmpty()
@@ -34,6 +35,15 @@ export class AuthCredentialsDto {
     example: '99999999',
   })
   mobileNo: number;
+
+  @ApiProperty({ type: Date, default: Date.now() })
+  createdAt: Date;
+
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  created_at: Date;
+
+@UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+ updated_at: Date;
 
 
 }

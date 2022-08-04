@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, ObjectIdColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ObjectIdColumn, CreateDateColumn,UpdateDateColumn  } from 'typeorm';
 
 @Entity({
   name: 'users',
@@ -44,4 +44,10 @@ export class User {
   })
   @Column()
   mobileNo: number;
+
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  created_at: Date;
+
+@UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
+ updated_at: Date;
 }
