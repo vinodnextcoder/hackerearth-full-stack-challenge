@@ -14,8 +14,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       envFilePath: [`.env.${process.env.STAGE || 'dev'}`],
       validationSchema: configValidationSchema,
     }),
-    
-
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
