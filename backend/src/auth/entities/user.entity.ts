@@ -36,4 +36,12 @@ export class User {
   })
   @Column()
   name: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'User mobile no',
+    example: '9999999',
+  })
+  @Column()
+  mobileNo: number;
 }

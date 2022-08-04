@@ -28,5 +28,12 @@ export class AuthCredentialsDto {
   })
   name: string;
 
+  @ApiProperty({
+    type: string,
+    description: 'mobile number',
+    example: '99999999',
+  })
+  mobileNo: number;
+
 
 }
