@@ -12,7 +12,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [
     ConfigModule.forRoot({
       envFilePath: [`.env.${process.env.STAGE || 'dev'}`],
-      validationSchema: configValidationSchema,
+      validationSchema: configValidationSchema
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -26,7 +26,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         useUnifiedTopology: true,
         useNewUrlParser: true,
         synchronize: true,
-        autoLoadEntities: true,
+        autoLoadEntities: true
       }),
     }),
     TypeOrmModule.forRoot(),

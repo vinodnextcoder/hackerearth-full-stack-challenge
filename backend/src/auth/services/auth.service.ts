@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Body, Injectable, UnauthorizedException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { AuthCredentialsDto } from '../dto/auth-credentials.dto';
 import { UserRepository } from '../repositories/user.repository';
@@ -34,5 +34,17 @@ export class AuthService {
     }
 
     throw new UnauthorizedException('Please check your credentials');
+  }
+  async getAllUsers(@Body() Body:Body): Promise<any> {
+    try{
+    let userList = await this.userRepository.find({roles:["test"]});
+    console.log(userList)
+    if (userList && userList.length>0){
+      return successMessage('Records Fetched', userList);
+    }
+    return errorMessage('Record not found', []);
+    }catch(error){
+      return errorMessage('Internal server error ', null);
+    }
   }
 }

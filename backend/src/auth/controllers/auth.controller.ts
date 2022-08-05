@@ -5,10 +5,11 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post ,Get} from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import { AuthCredentialsDto } from '../dto/auth-credentials.dto';
 import { SingInResponse } from '../responses/sign-in.response';
+import { User } from '../entities/user.entity';
 
 @ApiTags('Auth')
 @Controller('/api/v1/auth')
@@ -40,5 +41,10 @@ export class AuthController {
     @Body() authCredentialsDto: AuthCredentialsDto,
   ): Promise<SingInResponse> {
     return await this.authService.signIn(authCredentialsDto);
+  }
+
+  @Post()
+  async getUsers(@Body() Body:Body): Promise<User[]> {
+    return this.authService.getAllUsers(Body);
   }
 }
