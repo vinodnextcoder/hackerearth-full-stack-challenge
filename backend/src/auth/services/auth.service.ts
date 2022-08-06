@@ -7,6 +7,7 @@ import { UserRepository } from '../repositories/user.repository';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import { SingInResponse } from '../responses/sign-in.response';
 import { successMessage, errorMessage } from '../../utils'
+import { bool } from '@hapi/joi';
 
 @Injectable()
 export class AuthService {
@@ -37,8 +38,11 @@ export class AuthService {
   }
   async getAllUsers(@Body() Body:Body): Promise<any> {
     try{
-    let userList = await this.userRepository.find({roles:["test"]});
-    console.log(userList)
+      let reqObj ={};
+      if(Object.keys(Body).length ==0){
+        console.log(reqObj);
+      }
+    let userList = await this.userRepository.find({});
     if (userList && userList.length>0){
       return successMessage('Records Fetched', userList);
     }
