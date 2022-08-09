@@ -37,7 +37,6 @@ export class MatchesController {
   async createMatch(@Body() createMatchDto: CreateMatchDto): Promise<Match> {
     return this.matchesService.createMatch(createMatchDto);
   }
-
   @ApiOkResponse({
     description: 'Get all matches',
     type: Match,
