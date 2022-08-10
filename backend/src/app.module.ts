@@ -6,6 +6,7 @@ import { configValidationSchema } from './config.schema';
 import { MatchesModule } from './matches/matches.module';
 import { CommentsModule } from './comments/comments.module';
 import { EventsModule } from './events/events.module';
+import { BillsModule } from './bill/bills.module'
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -33,6 +34,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     AuthModule,
     MatchesModule,
     CommentsModule,
+    BillsModule,
     EventsModule,
   ],
   controllers: [],
