@@ -17,4 +17,13 @@ export class UpdateBillDto {
     example: '12300',
   })
   amount: number;
+
+
+  @IsString()
+  @ApiProperty({
+    type: String,
+    description: 'Bill unit consumption',
+    example: 'pending',
+  })
+  billStatus: String;
 }

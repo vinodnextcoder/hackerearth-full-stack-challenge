@@ -22,7 +22,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 
-@ApiTags('Matches')
+@ApiTags('Bills')
 @Controller('/api/v1/bill')
 export class BillsController {
   constructor(private readonly billsService: BillsService) {}
@@ -33,8 +33,8 @@ export class BillsController {
   })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
-  @Post()
-  async createMatch(@Body() createBillDto: CreateBillDto): Promise<Bill> {
+  @Post('createBill')
+  async createBill(@Body() createBillDto: CreateBillDto): Promise<any> {
     return this.billsService.createMatch(createBillDto);
   }
 

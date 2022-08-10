@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ObjectIdColumn,UpdateDateColumn } from 'typeorm';
 
 @Entity({ name: 'bills' })
 export class Bill {
@@ -8,7 +8,7 @@ export class Bill {
     description: 'Match id',
     example: '996829dc-4ae6-4f32-a6ed-c1c77b8d93d1',
   })
-  @PrimaryGeneratedColumn('uuid')
+  @ObjectIdColumn()
   id: string;
 
   @ApiProperty({
@@ -30,6 +30,16 @@ export class Bill {
     default: 0,
   })
   amount: number;
+
+  @ApiProperty({
+    type: String,
+    description: 'Bill unit consumption',
+    example: '23',
+  })
+  @Column({
+    default: "NULL",
+  })
+  billStatus: String;
 
   @Column({ type: 'timestamptz' }) // Recommended
   billDate: Date;
