@@ -1,10 +1,10 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { Match } from '../entities/match.entity';
+import { Bill } from '../entities/bill.entity';
 
 export const GetMatch = createParamDecorator(
-  (_data, ctx: ExecutionContext): Match => {
+  (_data, ctx: ExecutionContext): Bill => {
     const request = ctx.switchToHttp().getRequest();
 
-    return request.match;
+    return request.bill;
   },
 );

@@ -1,36 +1,36 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Match } from '../entities/match.entity';
-import { CreateMatchDto } from '../dto/create-match.dto';
-import { MatchesRepository } from '../repositories/matches.repository';
-import { UpdateMatchDto } from '../dto/update-match.dto';
+import { Bill } from '../entities/bill.entity';
+import { CreateBillDto } from '../dto/create-bill.dto';
+import { BillsRepository } from '../repositories/bills.repository';
+import { UpdateBillDto } from '../dto/update-bill.dto';
 import { EventsGateway } from 'src/events/events.gateway';
 
 @Injectable()
-export class MatchesService {
+export class BillsService {
   constructor(
-    private readonly matchesRepository: MatchesRepository,
+    private readonly billRepository: BillsRepository,
     private readonly eventsGateway: EventsGateway,
   ) {}
 
-  async createMatch(createMatchDto: CreateMatchDto): Promise<Match> {
-    const match = await this.matchesRepository.createMatch(createMatchDto);
+  async createMatch(createBillDto: CreateBillDto): Promise<Bill> {
+    const match = await this.billRepository.createMatch(createBillDto);
     this.eventsGateway.newMatch(match);
 
     return match;
   }
 
-  getAllMatches(): Promise<Match[]> {
-    return this.matchesRepository.find();
+  getAllMatches(): Promise<Bill[]> {
+    return this.billRepository.find();
   }
 
-  async getMatch(id: string): Promise<Match> {
-    const match = await this.matchesRepository.findOne({
+  async getMatch(id: string): Promise<Bill> {
+    const match = await this.billRepository.findOne({
       where: { id },
       relations: ['comments'],
     });
 
     if (!match) {
-      throw new NotFoundException(`Match with id: ${id} not found`);
+      throw new NotFoundException(`Bill with id: ${id} not found`);
     }
 
     return match;
@@ -38,11 +38,11 @@ export class MatchesService {
 
   async updateMatch(
     matchId: string,
-    updateMatchDto: UpdateMatchDto,
+    updateBillDto: UpdateBillDto,
   ): Promise<void> {
-    await this.matchesRepository.updateMatch(matchId, updateMatchDto);
+    await this.billRepository.updateMatch(matchId, updateBillDto);
 
-    this.eventsGateway.score({ id: matchId, ...updateMatchDto });
+    this.eventsGateway.score({ id: matchId, ...updateBillDto });
 
     return;
   }

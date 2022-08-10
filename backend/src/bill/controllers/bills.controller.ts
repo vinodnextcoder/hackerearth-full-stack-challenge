@@ -10,10 +10,10 @@ import {
   Put,
   HttpCode,
 } from '@nestjs/common';
-import { Match } from '../entities/match.entity';
-import { CreateMatchDto } from '../dto/create-match.dto';
-import { MatchesService } from '../services/matches.service';
-import { UpdateMatchDto } from '../dto/update-match.dto';
+import { Bill } from '../entities/bill.entity';
+import { CreateBillDto } from '../dto/create-bill.dto';
+import { BillsService } from '../services/bills.service';
+import { UpdateBillDto } from '../dto/update-bill.dto';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -23,38 +23,38 @@ import {
 } from '@nestjs/swagger';
 
 @ApiTags('Matches')
-@Controller('/api/v1/matches')
-export class MatchesController {
-  constructor(private readonly matchesService: MatchesService) {}
+@Controller('/api/v1/bill')
+export class BillsController {
+  constructor(private readonly billsService: BillsService) {}
 
   @ApiCreatedResponse({
-    description: 'Match created.',
-    type: Match,
+    description: 'Bill created.',
+    type: Bill,
   })
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @Post()
-  async createMatch(@Body() createMatchDto: CreateMatchDto): Promise<Match> {
-    return this.matchesService.createMatch(createMatchDto);
+  async createMatch(@Body() createBillDto: CreateBillDto): Promise<Bill> {
+    return this.billsService.createMatch(createBillDto);
   }
 
   @ApiOkResponse({
     description: 'Get all matches',
-    type: Match,
+    type: Bill,
     isArray: true,
   })
   @Get()
-  getMatches(): Promise<Match[]> {
-    return this.matchesService.getAllMatches();
+  getMatches(): Promise<Bill[]> {
+    return this.billsService.getAllMatches();
   }
 
   @ApiOkResponse({
     description: 'Get match',
-    type: Match,
+    type: Bill,
   })
   @Get(':id')
-  getMatch(@Param('id') id: string): Promise<Match> {
-    return this.matchesService.getMatch(id);
+  getMatch(@Param('id') id: string): Promise<Bill> {
+    return this.billsService.getMatch(id);
   }
 
   @ApiNoContentResponse({
@@ -66,8 +66,8 @@ export class MatchesController {
   @HttpCode(HttpStatus.NO_CONTENT)
   updateMatch(
     @Param('id') id: string,
-    @Body() updateMatchDto: UpdateMatchDto,
+    @Body() updateBillDto: UpdateBillDto,
   ): Promise<void> {
-    return this.matchesService.updateMatch(id, updateMatchDto);
+    return this.billsService.updateMatch(id, updateBillDto);
   }
 }
