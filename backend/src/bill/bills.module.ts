@@ -1,19 +1,19 @@
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { AuthModule } from '../auth/auth.module';
-import { MatchesService } from './services/matches.service';
-import { MatchesController } from './controllers/matches.controller';
-import { MatchesRepository } from './repositories/matches.repository';
+import { BillsService } from './services/bills.service';
+import { BillsController } from './controllers/bills.controller';
+import { BillsRepository } from './repositories/bills.repository';
 import { EventsModule } from '../events/events.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([MatchesRepository]),
+    TypeOrmModule.forFeature([BillsRepository]),
     AuthModule,
     EventsModule,
   ],
-  controllers: [MatchesController],
-  providers: [MatchesService],
-  exports: [MatchesService],
+  controllers: [BillsController],
+  providers: [BillsService],
+  exports: [BillsService],
 })
 export class BillsModule {}

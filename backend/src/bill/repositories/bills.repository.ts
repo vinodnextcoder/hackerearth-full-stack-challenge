@@ -1,22 +1,22 @@
 import { EntityRepository, Repository } from 'typeorm';
-import { Match } from '../entities/match.entity';
+import { Bill } from '../entities/bill.entity';
 import { NotFoundException } from '@nestjs/common';
-import { CreateMatchDto } from '../dto/create-match.dto';
-import { UpdateMatchDto } from '../dto/update-match.dto';
+import { CreateBillDto } from '../dto/create-bill.dto';
+import { UpdateBillDto } from '../dto/update-bill.dto';
 
-@EntityRepository(Match)
-export class MatchesRepository extends Repository<Match> {
-  createMatch(createMatchDto: CreateMatchDto): Promise<Match> {
-    const match = this.create(createMatchDto);
+@EntityRepository(Bill)
+export class BillsRepository extends Repository<Bill> {
+  createMatch(createBillDto: CreateBillDto): Promise<Bill> {
+    const match = this.create(createBillDto);
 
     return this.save(match);
   }
 
   async updateMatch(
     matchId: string,
-    updateMatchDto: UpdateMatchDto,
+    updateBillDto: UpdateBillDto,
   ): Promise<void> {
-    const response = await this.update({ id: matchId }, updateMatchDto);
+    const response = await this.update({ id: matchId }, updateBillDto);
 
     if (response.affected === 0) {
       throw new NotFoundException(`Match with id: ${matchId} not found`);
