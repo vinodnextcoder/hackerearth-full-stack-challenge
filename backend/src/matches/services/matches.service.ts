@@ -22,7 +22,6 @@ export class MatchesService {
   getAllMatches(): Promise<Match[]> {
     return this.matchesRepository.find();
   }
-
   async getMatch(id: string): Promise<Match> {
     const match = await this.matchesRepository.findOne({
       where: { id },
