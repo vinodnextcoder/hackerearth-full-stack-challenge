@@ -63,7 +63,6 @@ export class BillsController {
   @UseGuards(AuthGuard())
   @ApiBearerAuth()
   @Put(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
   updateMatch(
     @Param('id') id: string,
     @Body() updateBillDto: UpdateBillDto,

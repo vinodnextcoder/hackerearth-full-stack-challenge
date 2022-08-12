@@ -6,5 +6,6 @@ export class SingInResponse {
     description: 'Jwt token',
     example: 'sampleToken',
   })
+
   accessToken: string;
 }

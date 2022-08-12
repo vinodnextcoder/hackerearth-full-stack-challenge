@@ -7,7 +7,6 @@ import { UserRepository } from '../repositories/user.repository';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import { SingInResponse } from '../responses/sign-in.response';
 import { successMessage, errorMessage } from '../../utils'
-import { bool } from '@hapi/joi';
 
 @Injectable()
 export class AuthService {
@@ -32,6 +31,7 @@ export class AuthService {
       const accessToken = this.jwtService.sign(payload);
 
       return { accessToken };
+      
     }
 
     throw new UnauthorizedException('Please check your credentials');
