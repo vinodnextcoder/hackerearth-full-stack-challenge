@@ -17,7 +17,6 @@ export class BillsService {
   async createMatch(createBillDto: CreateBillDto): Promise<Bill> {
     const match = await this.billRepository.createMatch(createBillDto);
     this.eventsGateway.newMatch(match);
-
     return match;
   }
 
