@@ -4,6 +4,7 @@ import { NotFoundException } from '@nestjs/common';
 import { CreateBillDto } from '../dto/create-bill.dto';
 import { UpdateBillDto } from '../dto/update-bill.dto';
 import { successMessage, errorMessage } from '../../utils'
+import { ObjectID } from 'mongodb';
 
 @EntityRepository(Bill)
 export class BillsRepository extends Repository<Bill> {
@@ -19,14 +20,16 @@ export class BillsRepository extends Repository<Bill> {
 
 
 async updateMatch(
-    matchId: string,
+    id: string,
     updateBillDto: UpdateBillDto,
   ): Promise<any> {
     try {
-      const response = await this.update({ id: matchId }, updateBillDto);
+      const response = await this.update({id:new ObjectID(id)}, updateBillDto);
+      // console.log(response)
       if (response.affected === 0) {
-        throw new NotFoundException(`Match with id: ${matchId} not found`);
+        return errorMessage('Record not updated', null);
       }
+      return successMessage('Record updated successfully', null);
     } catch (error) {
       return errorMessage('Internal server error.', null);
     }
