@@ -5,6 +5,7 @@ import { BillsRepository } from '../repositories/bills.repository';
 import { UpdateBillDto } from '../dto/update-bill.dto';
 import { EventsGateway } from 'src/events/events.gateway';
 import { successMessage, errorMessage } from '../../utils'
+import { ObjectID } from 'mongodb';
 
 @Injectable()
 export class BillsService {
@@ -22,7 +23,8 @@ export class BillsService {
 
   async getAllMatches(): Promise<any> {
     try {
-      let result = await this.billRepository.find();
+      let result = await this.billRepository.find( { id:1 } as any);
+      console.log(result)
       if (result && result.length>0){
         return successMessage('Records Fetched', result);
       }
@@ -31,18 +33,18 @@ export class BillsService {
       return errorMessage('Internal server error ', null);
     }
   }
-
-  async getMatch(id: string): Promise<Bill> {
+  // where: { id:new ObjectID(id) }
+  async getMatch(id: string): Promise<any> {
+    console.log(id)
     const match = await this.billRepository.findOne({
-      where: { id },
-      relations: ['comments'],
-    });
-
+      _id: new ObjectID(id)
+    } as any);
+    
     if (!match) {
-      throw new NotFoundException(`Bill with id: ${id} not found`);
+      return errorMessage('Record not found', {});
     }
 
-    return match;
+    return successMessage('Records Fetched', match);
   }
 
   async updateMatch(
@@ -50,9 +52,7 @@ export class BillsService {
     updateBillDto: UpdateBillDto,
   ): Promise<void> {
     let updateObj = await this.billRepository.updateMatch(matchId, updateBillDto);
-  // console.log(updateObj)
-    // this.eventsGateway.score({ id: matchId, ...updateBillDto });
-
+    this.eventsGateway.billEvent({ id: matchId, ...updateBillDto });
     return updateObj
   }
 }
