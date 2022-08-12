@@ -22,4 +22,7 @@ export class EventsGateway {
   comment(comment: Comment): void {
     this.server.emit('comment', comment);
   }
+  billEvent(data: unknown): void {
+    this.server.emit('bill', data);
+  }
 }
