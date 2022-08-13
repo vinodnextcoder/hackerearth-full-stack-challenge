@@ -3,8 +3,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { AuthModule } from './auth/auth.module';
 import { configValidationSchema } from './config.schema';
-import { MatchesModule } from './matches/matches.module';
-import { CommentsModule } from './comments/comments.module';
 import { EventsModule } from './events/events.module';
 import { BillsModule } from './bill/bills.module'
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -32,8 +30,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
     TypeOrmModule.forRoot(),
     AuthModule,
-    MatchesModule,
-    CommentsModule,
     BillsModule,
     EventsModule,
   ],

@@ -17,13 +17,12 @@ export class BillsService {
   async createMatch(createBillDto: CreateBillDto): Promise<Bill> {
     const match = await this.billRepository.createMatch(createBillDto);
     this.eventsGateway.newMatch(match);
-
     return match;
   }
 
   async getAllMatches(): Promise<any> {
     try {
-      let result = await this.billRepository.find( { id:1 } as any);
+      let result = await this.billRepository.find();
       console.log(result)
       if (result && result.length>0){
         return successMessage('Records Fetched', result);

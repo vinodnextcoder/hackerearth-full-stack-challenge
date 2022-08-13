@@ -1,6 +1,5 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Bill } from '../entities/bill.entity';
-import { NotFoundException } from '@nestjs/common';
 import { CreateBillDto } from '../dto/create-bill.dto';
 import { UpdateBillDto } from '../dto/update-bill.dto';
 import { successMessage, errorMessage } from '../../utils'
@@ -14,6 +13,7 @@ export class BillsRepository extends Repository<Bill> {
       const recordSave = await this.save(match);
       return successMessage('Record created successfully', null);
     } catch (error) {
+      console.log(error)
       return errorMessage('Internal server error.', null);
     }
   }
@@ -25,7 +25,6 @@ async updateMatch(
   ): Promise<any> {
     try {
       const response = await this.update({id:new ObjectID(id)}, updateBillDto);
-      // console.log(response)
       if (response.affected === 0) {
         return errorMessage('Record not updated', null);
       }
