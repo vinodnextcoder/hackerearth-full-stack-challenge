@@ -22,7 +22,7 @@ export class BillsService {
 
   async getAllMatches(): Promise<any> {
     try {
-      let result = await this.billRepository.find( { id:1 } as any);
+      let result = await this.billRepository.find();
       console.log(result)
       if (result && result.length>0){
         return successMessage('Records Fetched', result);
