@@ -37,7 +37,6 @@ export class BillsController {
   async createBill(@Body() createBillDto: CreateBillDto): Promise<any> {
     return this.billsService.createMatch(createBillDto);
   }
-
   @ApiOkResponse({
     description: 'Get all matches',
     type: Bill,
