@@ -128,11 +128,11 @@ export class ErrorHttpFilter implements ExceptionFilter {
 
         responseExpress
             .setHeader('x-custom-lang', reqCustomLang)
-            .setHeader('x-timestamp', __timestamp)
-            .setHeader('x-timezone', __timezone)
-            .setHeader('x-request-id', __requestId)
-            .setHeader('x-version', __version)
-            .setHeader('x-repo-version', __repoVersion)
+            // .setHeader('x-timestamp', __timestamp)
+            // .setHeader('x-timezone', __timezone)
+            // .setHeader('x-request-id', __requestId)
+            // .setHeader('x-version', __version)
+            // .setHeader('x-repo-version', __repoVersion)
             .status(statusHttp)
             .json(resResponse);
 
