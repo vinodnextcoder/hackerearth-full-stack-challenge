@@ -35,6 +35,7 @@ export class ErrorHttpFilter implements ExceptionFilter {
         const statusHttp: number = exception.getStatus();
         const request = ctx.getRequest<IRequestApp>();
         const responseExpress: Response = ctx.getResponse<Response>();
+        console.log('request------>>',request)
 
         // get request headers
         const reqCustomLang = request.header('x-custom-lang');
@@ -128,11 +129,11 @@ export class ErrorHttpFilter implements ExceptionFilter {
 
         responseExpress
             .setHeader('x-custom-lang', reqCustomLang)
-            .setHeader('x-timestamp', __timestamp)
-            .setHeader('x-timezone', __timezone)
-            .setHeader('x-request-id', __requestId)
-            .setHeader('x-version', __version)
-            .setHeader('x-repo-version', __repoVersion)
+            // .setHeader('x-timestamp', __timestamp)
+            // .setHeader('x-timezone', __timezone)
+            // .setHeader('x-request-id', __requestId)
+            // .setHeader('x-version', __version)
+            // .setHeader('x-repo-version', __repoVersion)
             .status(statusHttp)
             .json(resResponse);
 
