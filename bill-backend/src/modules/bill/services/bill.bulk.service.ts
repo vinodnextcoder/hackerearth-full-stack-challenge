@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { DeleteResult } from 'mongodb';
-import { UserDocument, UserEntity } from '../schemas/user.schema';
+import { BillDocument, BillEntity } from '../schemas/bill.schema';
 import { DatabaseEntity } from 'src/common/database/decorators/database.decorator';
 
 @Injectable()
-export class UserBulkService {
+export class BillBulkService {
     constructor(
-        @DatabaseEntity(UserEntity.name)
-        private readonly userModel: Model<UserDocument>
+        @DatabaseEntity(BillEntity.name)
+        private readonly userModel: Model<BillDocument>
     ) {}
 
     async deleteMany(find: Record<string, any>): Promise<DeleteResult> {

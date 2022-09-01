@@ -42,9 +42,9 @@ export class BillEntity {
 
 }
 
-export const UserDatabaseName = 'bills';
-export const UserSchema = SchemaFactory.createForClass(BillEntity);
+export const BillDatabaseName = 'bills';
+export const BillSchema = SchemaFactory.createForClass(BillEntity);
 
-export type UserDocument = BillEntity & Document;
+export type BillDocument = BillEntity & Document;
 
 
