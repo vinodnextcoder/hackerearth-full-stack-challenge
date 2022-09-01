@@ -11,6 +11,8 @@ import { RoleModule } from 'src/modules/role/role.module';
 import { UserController } from 'src/modules/user/controllers/user.controller';
 import { UserModule } from 'src/modules/user/user.module';
 import { AuthController } from '../../common/auth/controllers/auth.controller';
+import { BillController } from '../../modules/bill/controllers/bill.controller';
+import { BillModule } from 'src/modules/bill/bill.module'
 
 @Module({
     controllers: [
@@ -18,6 +20,7 @@ import { AuthController } from '../../common/auth/controllers/auth.controller';
         UserController,
         HealthController,
         AuthController,
+        BillController
     ],
     providers: [],
     exports: [],
@@ -30,6 +33,7 @@ import { AuthController } from '../../common/auth/controllers/auth.controller';
         HealthModule,
         TerminusModule,
         HttpModule,
+        BillModule
     ],
 })
 export class RoutesModule {}
