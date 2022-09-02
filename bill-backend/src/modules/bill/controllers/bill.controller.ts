@@ -126,48 +126,18 @@ export class BillController {
     //     return user;
     // }
 
-    // @Response('user.create')
-    // @AuthAdminJwtGuard(
-    //     ENUM_AUTH_PERMISSIONS.USER_READ,
-    //     ENUM_AUTH_PERMISSIONS.USER_CREATE
-    // )
+    @Response('bill.create')
+    @AuthAdminJwtGuard(
+        ENUM_AUTH_PERMISSIONS.USER_READ,
+        ENUM_AUTH_PERMISSIONS.USER_CREATE
+    )
    
     @Post('/createBill')
     async create(
         @Body()
         body: BillCreateDto
     ): Promise<IResponse> {
-        // const checkExist: IUserCheckExist = await this.userService.checkExist(
-        //     body.email,
-        //     body.mobileNumber
-        // );
-
-        // if (checkExist.email && checkExist.mobileNumber) {
-        //     throw new BadRequestException({
-        //         statusCode: ENUM_USER_STATUS_CODE_ERROR.USER_EXISTS_ERROR,
-        //         message: 'user.error.exist',
-        //     });
-        // } else if (checkExist.email) {
-        //     throw new BadRequestException({
-        //         statusCode: ENUM_USER_STATUS_CODE_ERROR.USER_EMAIL_EXIST_ERROR,
-        //         message: 'user.error.emailExist',
-        //     });
-        // } else if (checkExist.mobileNumber) {
-        //     throw new BadRequestException({
-        //         statusCode:
-        //             ENUM_USER_STATUS_CODE_ERROR.USER_MOBILE_NUMBER_EXIST_ERROR,
-        //         message: 'user.error.mobileNumberExist',
-        //     });
-        // }
-
-        // const role = await this.roleService.findOneById(body.role);
-        // if (!role) {
-        //     throw new NotFoundException({
-        //         statusCode: ENUM_ROLE_STATUS_CODE_ERROR.ROLE_NOT_FOUND_ERROR,
-        //         message: 'role.error.notFound',
-        //     });
-        // }
-
+      
         try {
             
             let amount: number =  body.unitConsume * 2;
