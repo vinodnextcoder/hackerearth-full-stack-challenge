@@ -16,6 +16,7 @@ export class BillEntity {
 
     @Prop({
         index: true,
+        default: null,
     })
     billPaidDate: Date;
 

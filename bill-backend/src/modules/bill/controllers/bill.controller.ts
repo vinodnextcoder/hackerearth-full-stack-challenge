@@ -53,6 +53,7 @@ import { BillCreateDto } from '../dtos/bill.create.dto';
 // import { UserListSerialization } from '../serializations/user.list.serialization';
 import { BillService } from '../services/bill.service';
 // import { IUserCheckExist, IUserDocument } from '../user.interface';
+import moment from 'moment';
 
 @Controller({
     version: '1',
@@ -169,20 +170,18 @@ export class BillController {
 
         try {
             
+            let amount: number =  body.unitConsume * 2;
 
             const create = await this.billService.create({
-                // firstName: body.firstName,
-                // lastName: body.lastName,
-                // email: body.email,
-                // mobileNumber: body.mobileNumber,
-                // role: body.role,
-                // password: password.passwordHash,
-                // passwordExpired: password.passwordExpired,
-                // salt: password.salt,
+                billDate: moment().format(),
+                unitConsume: body.unitConsume,
+                billStatus: body.billStatus,
+                amount
             });
 
             return {
                 _id: create._id,
+                message:'Bill created successfully'
             };
         } catch (err: any) {
             throw new InternalServerErrorException({

@@ -16,5 +16,5 @@ export class BillCreateDto {
 
 
     @IsNotEmpty()
-    readonly unitConsume: string;
+    readonly unitConsume: number;
 }
