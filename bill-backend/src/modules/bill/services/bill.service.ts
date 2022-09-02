@@ -118,32 +118,22 @@ export class BillService {
 
     //     return user.lean();
     // }
-
+   
     async create({
-        firstName,
-        lastName,
-        password,
-        passwordExpired,
-        salt,
-        email,
-        mobileNumber,
-        role,
+        billDate,
+        unitConsume,
+        billStatus,
+        amount
     }: any): Promise<BillDocument> {
-        // const user: BillEntity = {
-        //     firstName,
-        //     email,
-        //     mobileNumber,
-        //     password,
-        //     role: new Types.ObjectId(role),
-        //     isActive: true,
-        //     lastName: lastName || undefined,
-        //     salt,
-        //     passwordExpired,
-        // };
+        const bill = {
+            billDate,
+        unitConsume,
+        billStatus,
+        amount
+        };
 
-        // const create: BillDocument = new this.billModel(user);
-        // return create.save();
-        return null;
+        const create: BillDocument = new this.billModel(bill);
+        return create.save();
     }
 
     // async deleteOneById(_id: string): Promise<UserDocument> {
