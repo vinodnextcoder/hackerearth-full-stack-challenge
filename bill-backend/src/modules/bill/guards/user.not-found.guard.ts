@@ -10,7 +10,7 @@ import { ENUM_USER_STATUS_CODE_ERROR } from '../constants/user.status-code.const
 export class UserNotFoundGuard implements CanActivate {
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const { __user } = context.switchToHttp().getRequest();
-
+        
         if (!__user) {
             throw new NotFoundException({
                 statusCode: ENUM_USER_STATUS_CODE_ERROR.USER_NOT_FOUND_ERROR,

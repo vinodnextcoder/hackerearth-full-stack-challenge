@@ -16,6 +16,7 @@ import { IAuthPassword } from 'src/common/auth/auth.interface';
 import { DatabaseEntity } from 'src/common/database/decorators/database.decorator';
 import { plainToInstance } from 'class-transformer';
 // import { UserPayloadSerialization } from '../serializations/user.payload.serialization';
+import moment from 'moment';
 
 
 @Injectable()
@@ -144,17 +145,16 @@ export class BillService {
     //     return this.userModel.findOneAndDelete(find);
     // }
 
-    // async updateOneById(
-    //     _id: string,
-    //     { firstName, lastName }: UserUpdateDto
-    // ): Promise<UserDocument> {
-    //     const user: UserDocument = await this.userModel.findById(_id);
-
-    //     user.firstName = firstName;
-    //     user.lastName = lastName || undefined;
-
-    //     return user.save();
-    // }
+    async updateOneById(
+        _id: string,
+        { billStatus}: any
+    ): Promise<any> {
+        const bill: any = await this.billModel.findById(_id);
+        bill.billStatus = billStatus;
+        bill.lastName = moment().format();
+        const billUpdate = await bill.save();
+        return billUpdate
+    }
 
     // async checkExist(
     //     email: string,
