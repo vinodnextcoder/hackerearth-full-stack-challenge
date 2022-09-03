@@ -11,6 +11,7 @@ import {
     Patch,
     NotFoundException,
     UploadedFile,
+    Param,
 } from '@nestjs/common';
 import { ENUM_AUTH_PERMISSIONS } from 'src/common/auth/constants/auth.enum.permission.constant';
 import { AuthAdminJwtGuard } from 'src/common/auth/decorators/auth.jwt.decorator';
@@ -36,13 +37,13 @@ import {
 import { ENUM_ROLE_STATUS_CODE_ERROR } from 'src/modules/role/constants/role.status-code.constant';
 import { RoleService } from 'src/modules/role/services/role.service';
 import { ENUM_USER_STATUS_CODE_ERROR } from '../constants/user.status-code.constant';
-// import {
-//     UserDeleteGuard,
-//     UserGetGuard,
-//     UserUpdateActiveGuard,
-//     UserUpdateGuard,
-//     UserUpdateInactiveGuard,
-// } from '../decorators/user.admin.decorator';
+import {
+    // UserDeleteGuard,
+    // UserGetGuard,
+    // UserUpdateActiveGuard,
+    UserUpdateGuard,
+    // UserUpdateInactiveGuard,
+} from '../decorators/bill.admin.decorator';
 // import { GetUser } from '../decorators/user.decorator';
 import { BillCreateDto } from '../dtos/bill.create.dto';
 // import { UserImportDto } from '../dtos/user.import.dto';
@@ -126,48 +127,18 @@ export class BillController {
     //     return user;
     // }
 
-    // @Response('user.create')
-    // @AuthAdminJwtGuard(
-    //     ENUM_AUTH_PERMISSIONS.USER_READ,
-    //     ENUM_AUTH_PERMISSIONS.USER_CREATE
-    // )
+    @Response('bill.create')
+    @AuthAdminJwtGuard(
+        ENUM_AUTH_PERMISSIONS.USER_READ,
+        ENUM_AUTH_PERMISSIONS.USER_CREATE
+    )
    
     @Post('/createBill')
     async create(
         @Body()
         body: BillCreateDto
     ): Promise<IResponse> {
-        // const checkExist: IUserCheckExist = await this.userService.checkExist(
-        //     body.email,
-        //     body.mobileNumber
-        // );
-
-        // if (checkExist.email && checkExist.mobileNumber) {
-        //     throw new BadRequestException({
-        //         statusCode: ENUM_USER_STATUS_CODE_ERROR.USER_EXISTS_ERROR,
-        //         message: 'user.error.exist',
-        //     });
-        // } else if (checkExist.email) {
-        //     throw new BadRequestException({
-        //         statusCode: ENUM_USER_STATUS_CODE_ERROR.USER_EMAIL_EXIST_ERROR,
-        //         message: 'user.error.emailExist',
-        //     });
-        // } else if (checkExist.mobileNumber) {
-        //     throw new BadRequestException({
-        //         statusCode:
-        //             ENUM_USER_STATUS_CODE_ERROR.USER_MOBILE_NUMBER_EXIST_ERROR,
-        //         message: 'user.error.mobileNumberExist',
-        //     });
-        // }
-
-        // const role = await this.roleService.findOneById(body.role);
-        // if (!role) {
-        //     throw new NotFoundException({
-        //         statusCode: ENUM_ROLE_STATUS_CODE_ERROR.ROLE_NOT_FOUND_ERROR,
-        //         message: 'role.error.notFound',
-        //     });
-        // }
-
+      
         try {
             
             let amount: number =  body.unitConsume * 2;
@@ -214,33 +185,34 @@ export class BillController {
     //     return;
     // }
 
-    // @Response('user.update')
+    @Response('user.update')
     // @UserUpdateGuard()
     // @RequestParamGuard(UserRequestDto)
-    // @AuthAdminJwtGuard(
-    //     ENUM_AUTH_PERMISSIONS.USER_READ,
-    //     ENUM_AUTH_PERMISSIONS.USER_UPDATE
-    // )
-    // @Put('/update/:user')
-    // async update(
-    //     @GetUser() user: IUserDocument,
-    //     @Body()
-    //     body: UserUpdateDto
-    // ): Promise<IResponse> {
-    //     try {
-    //         await this.userService.updateOneById(user._id, body);
-    //     } catch (err: any) {
-    //         throw new InternalServerErrorException({
-    //             statusCode: ENUM_ERROR_STATUS_CODE_ERROR.ERROR_UNKNOWN,
-    //             message: 'http.serverError.internalServerError',
-    //             error: err.message,
-    //         });
-    //     }
+    @AuthAdminJwtGuard(
+        ENUM_AUTH_PERMISSIONS.USER_READ,
+        ENUM_AUTH_PERMISSIONS.USER_UPDATE
+    )
+    @Put('/update/:id')
+    async update(
 
-    //     return {
-    //         _id: user._id,
-    //     };
-    // }
+        @Body()
+        body: any,
+        @Param('id') id
+    ): Promise<IResponse> {
+        try {
+            // console.log(id,body)
+            await this.billService.updateOneById(id, body);
+        } catch (err: any) {
+            throw new InternalServerErrorException({
+                statusCode: ENUM_ERROR_STATUS_CODE_ERROR.ERROR_UNKNOWN,
+                message: 'http.serverError.internalServerError',
+                error: err.message,
+            });
+        }
+        return {
+            _id: 'test',
+        };
+    }
 
     // @Response('user.inactive')
     // @UserUpdateInactiveGuard()
