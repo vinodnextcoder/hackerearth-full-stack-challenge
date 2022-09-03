@@ -17,4 +17,7 @@ export class BillCreateDto {
 
     @IsNotEmpty()
     readonly unitConsume: number;
+
+    readonly customerId:string
+    readonly createdBy:string
 }

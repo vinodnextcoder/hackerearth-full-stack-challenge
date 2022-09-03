@@ -12,6 +12,8 @@ import {
     NotFoundException,
     UploadedFile,
     Param,
+    Req,
+    Headers
 } from '@nestjs/common';
 import { ENUM_AUTH_PERMISSIONS } from 'src/common/auth/constants/auth.enum.permission.constant';
 import { AuthAdminJwtGuard } from 'src/common/auth/decorators/auth.jwt.decorator';
@@ -41,20 +43,20 @@ import {
     // UserDeleteGuard,
     // UserGetGuard,
     // UserUpdateActiveGuard,
-    UserUpdateGuard,
     // UserUpdateInactiveGuard,
 } from '../decorators/bill.admin.decorator';
-// import { GetUser } from '../decorators/user.decorator';
+import { GetUser } from '../../user/decorators/user.decorator';
 import { BillCreateDto } from '../dtos/bill.create.dto';
 // import { UserImportDto } from '../dtos/user.import.dto';
-// import { UserListDto } from '../dtos/user.list.dto';
+import { BillListDto } from '../dtos/bill.list.dto';
 // import { UserRequestDto } from '../dtos/user.request.dto';
 // import { UserUpdateDto } from '../dtos/user.update.dto';
 // import { UserGetSerialization } from '../serializations/user.get.serialization';
-// import { UserListSerialization } from '../serializations/user.list.serialization';
+import { UserListSerialization } from '../serializations/user.list.serialization';
 import { BillService } from '../services/bill.service';
-// import { IUserCheckExist, IUserDocument } from '../user.interface';
+import {  IBillDocument } from '../bill.interface';
 import moment from 'moment';
+import { Request } from 'express';
 
 @Controller({
     version: '1',
@@ -73,48 +75,49 @@ export class BillController {
      * @returns 
      */
 
-    // @ResponsePaging('user.list', {
-    //     classSerialization: UserListSerialization,
-    // })
-    // @AuthAdminJwtGuard(ENUM_AUTH_PERMISSIONS.USER_READ)
-    // @Get('/list')
-    // async list(
-    //     @Query()
-    //     {
-    //         page,
-    //         perPage,
-    //         sort,
-    //         search,
-    //         availableSort,
-    //         availableSearch,
-    //     }: UserListDto
-    // ): Promise<IResponsePaging> {
-    //     const skip: number = await this.paginationService.skip(page, perPage);
-    //     const find: Record<string, any> = {
-    //         ...search,
-    //     };
+    @ResponsePaging('bill.list', {
+        classSerialization: UserListSerialization
+    })
+    @AuthAdminJwtGuard(ENUM_AUTH_PERMISSIONS.USER_READ)
+    @Get('/list')
+    async list(
+        @Query()
+        {
+            page,
+            perPage,
+            sort,
+            search,
+            availableSort,
+            availableSearch,
+        }: BillListDto
+    ): Promise<IResponsePaging> {
+        console.log(page,perPage);
+        const skip: number = await this.paginationService.skip(page, perPage);
+        const find: Record<string, any> = {
+            ...search,
+        };
 
-    //     const users: IUserDocument[] = await this.userService.findAll(find, {
-    //         limit: perPage,
-    //         skip: skip,
-    //         sort,
-    //     });
-    //     const totalData: number = await this.userService.getTotal(find);
-    //     const totalPage: number = await this.paginationService.totalPage(
-    //         totalData,
-    //         perPage
-    //     );
+        const users: IBillDocument[] = await this.billService.findAll(find, {
+            limit: perPage,
+            skip: skip,
+            sort,
+        });
+        const totalData: number = await this.billService.getTotal(find);
+        const totalPage: number = await this.paginationService.totalPage(
+            totalData,
+            perPage
+        );
 
-    //     return {
-    //         totalData,
-    //         totalPage,
-    //         currentPage: page,
-    //         perPage,
-    //         availableSearch,
-    //         availableSort,
-    //         data: users,
-    //     };
-    // }
+        return {
+            totalData,
+            totalPage,
+            currentPage: page,
+            perPage,
+            availableSearch,
+            availableSort,
+            data: users,
+        };
+    }
 //******************************** */
     // @Response('user.get', {
     //     classSerialization: UserGetSerialization,
@@ -132,22 +135,27 @@ export class BillController {
         ENUM_AUTH_PERMISSIONS.USER_READ,
         ENUM_AUTH_PERMISSIONS.USER_CREATE
     )
-   
     @Post('/createBill')
     async create(
         @Body()
-        body: BillCreateDto
+        body: BillCreateDto,
+        @Req() request: Request
     ): Promise<IResponse> {
-      
+        
+        
         try {
-            
+            let createdBy: any
+            createdBy=request.user
+        
             let amount: number =  body.unitConsume * 2;
 
             const create = await this.billService.create({
                 billDate: moment().format(),
                 unitConsume: body.unitConsume,
                 billStatus: body.billStatus,
-                amount
+                amount,
+                createdBy:createdBy._id,
+                customerId:body.customerId
             });
 
             return {
@@ -186,8 +194,6 @@ export class BillController {
     // }
 
     @Response('user.update')
-    // @UserUpdateGuard()
-    // @RequestParamGuard(UserRequestDto)
     @AuthAdminJwtGuard(
         ENUM_AUTH_PERMISSIONS.USER_READ,
         ENUM_AUTH_PERMISSIONS.USER_UPDATE

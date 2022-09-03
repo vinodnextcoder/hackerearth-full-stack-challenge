@@ -16,7 +16,7 @@ import {
     USER_DEFAULT_SORT,
 } from '../constants/user.list.constant';
 
-export class UserListDto implements PaginationListAbstract {
+export class BillListDto implements PaginationListAbstract {
     @PaginationSearch(USER_DEFAULT_AVAILABLE_SEARCH)
     readonly search: Record<string, any>;
 

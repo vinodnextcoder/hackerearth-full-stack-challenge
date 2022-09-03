@@ -35,6 +35,16 @@ export class BillEntity {
 
     @Prop({
         index: true,
+    })
+    customerId: string;
+
+    @Prop({
+        index: true,
+    })
+    createdBy: string;
+
+    @Prop({
+        index: true,
         required: true,
         default: true,
     })
