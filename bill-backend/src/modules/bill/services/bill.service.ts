@@ -8,7 +8,7 @@ import {
     IDatabaseFindAllOptions,
     IDatabaseFindOneOptions,
 } from 'src/common/database/database.interface';
-// import { IUserCheckExist, IUserCreate, IUserDocument } from '../user.interface';
+import { IBillDocument } from '../bill.interface';
 import { RoleEntity } from 'src/modules/role/schemas/role.schema';
 import { PermissionEntity } from 'src/modules/permission/schemas/permission.schema';
 // import { UserUpdateDto } from '../dtos/user.update.dto';
@@ -32,33 +32,30 @@ export class BillService {
         this.uploadPath = this.configService.get<string>('user.uploadPath');
     }
 
-    // async findAll(
-    //     find?: Record<string, any>,
-    //     options?: IDatabaseFindAllOptions
-    // ): Promise<IUserDocument[]> {
-    //     const users = this.userModel.find(find).populate({
-    //         path: 'role',
-    //         model: RoleEntity.name,
-    //     });
+    async findAll(
+        find?: Record<string, any>,
+        options?: IDatabaseFindAllOptions
+    ): Promise<IBillDocument[]> {
+        const users = this.billModel.find(find);
 
-    //     if (
-    //         options &&
-    //         options.limit !== undefined &&
-    //         options.skip !== undefined
-    //     ) {
-    //         users.limit(options.limit).skip(options.skip);
-    //     }
+        if (
+            options &&
+            options.limit !== undefined &&
+            options.skip !== undefined
+        ) {
+            users.limit(options.limit).skip(options.skip);
+        }
 
-    //     if (options && options.sort) {
-    //         users.sort(options.sort);
-    //     }
+        if (options && options.sort) {
+            users.sort(options.sort);
+        }
 
-    //     return users.lean();
-    // }
+        return users.lean();
+    }
 
-    // async getTotal(find?: Record<string, any>): Promise<number> {
-    //     return this.userModel.countDocuments(find);
-    // }
+    async getTotal(find?: Record<string, any>): Promise<number> {
+        return this.billModel.countDocuments(find);
+    }
 
     // async findOneById<T>(
     //     _id: string,
@@ -124,15 +121,18 @@ export class BillService {
         billDate,
         unitConsume,
         billStatus,
-        amount
+        amount,
+        createdBy,
+        customerId
     }: any): Promise<BillDocument> {
         const bill = {
-            billDate,
+        billDate,
         unitConsume,
         billStatus,
-        amount
+        amount,
+        createdBy,
+        customerId
         };
-
         const create: BillDocument = new this.billModel(bill);
         return create.save();
     }

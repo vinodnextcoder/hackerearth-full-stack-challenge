@@ -18,25 +18,14 @@ export class UserGetSerialization {
     }))
     readonly role: IRoleDocument;
 
-    readonly email: string;
-    readonly mobileNumber: string;
+    readonly billStatus: string;
+    readonly unitConsume: number;
     readonly isActive: boolean;
-    readonly firstName: string;
-    readonly lastName: string;
-    readonly photo?: IAwsS3;
+    readonly amount: string;
+    readonly billDate: string;
+    readonly billPaidDate?: string;
 
-    @Expose()
-    get fullName(): string {
-        return `${this.firstName} ${this.lastName}`;
-    }
 
-    @Exclude()
-    readonly password: string;
-
-    readonly passwordExpired: Date;
-
-    @Exclude()
-    readonly salt: string;
 
     readonly createdAt: Date;
 
