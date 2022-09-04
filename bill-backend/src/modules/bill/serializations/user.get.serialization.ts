@@ -1,5 +1,4 @@
-import { Exclude, Expose, Transform, Type } from 'class-transformer';
-import { IAwsS3 } from 'src/common/aws/aws.interface';
+import { Exclude, Transform, Type } from 'class-transformer';
 import { IRoleDocument } from 'src/modules/role/role.interface';
 
 export class UserGetSerialization {
@@ -24,9 +23,6 @@ export class UserGetSerialization {
     readonly amount: string;
     readonly billDate: string;
     readonly billPaidDate?: string;
-
-
-
     readonly createdAt: Date;
 
     @Exclude()
