@@ -21,13 +21,8 @@ import {
     IResponse,
     IResponsePaging,
 } from 'src/common/response/response.interface';
-
-import {
-    // UserDeleteGuard,
-} from '../decorators/bill.admin.decorator';
 import { BillCreateDto } from '../dtos/bill.create.dto';
 import { BillListDto } from '../dtos/bill.list.dto';
-import { UserListSerialization } from '../serializations/user.list.serialization';
 import { BillService } from '../services/bill.service';
 import { IBillDocument } from '../bill.interface';
 import moment from 'moment';
@@ -48,9 +43,7 @@ export class BillController {
      * @returns 
      */
 
-    @ResponsePaging('bill.list', {
-        classSerialization: UserListSerialization
-    })
+    @ResponsePaging('bill.list')
     @AuthAdminJwtGuard(ENUM_AUTH_PERMISSIONS.USER_READ)
     @Get('/list')
     async list(

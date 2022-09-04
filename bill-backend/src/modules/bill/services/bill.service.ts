@@ -1,35 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { Types } from 'mongoose';
-import { ConfigService } from '@nestjs/config';
 import { BillDocument, BillEntity } from '../schemas/bill.schema';
-import { HelperStringService } from 'src/common/helper/services/helper.string.service';
 import {
-    IDatabaseFindAllOptions,
-    IDatabaseFindOneOptions,
+    IDatabaseFindAllOptions
 } from 'src/common/database/database.interface';
 import { IBillDocument } from '../bill.interface';
-import { RoleEntity } from 'src/modules/role/schemas/role.schema';
-import { PermissionEntity } from 'src/modules/permission/schemas/permission.schema';
-// import { UserUpdateDto } from '../dtos/user.update.dto';
-import { IAuthPassword } from 'src/common/auth/auth.interface';
 import { DatabaseEntity } from 'src/common/database/decorators/database.decorator';
-import { plainToInstance } from 'class-transformer';
-// import { UserPayloadSerialization } from '../serializations/user.payload.serialization';
 import moment from 'moment';
 
 
 @Injectable()
 export class BillService {
-    private readonly uploadPath: string;
-
     constructor(
         @DatabaseEntity(BillEntity.name)
         private readonly billModel: Model<BillDocument>,
-        private readonly helperStringService: HelperStringService,
-        private readonly configService: ConfigService
     ) {
-        this.uploadPath = this.configService.get<string>('user.uploadPath');
+    
     }
 
     async findAll(
@@ -57,65 +43,7 @@ export class BillService {
         return this.billModel.countDocuments(find);
     }
 
-    // async findOneById<T>(
-    //     _id: string,
-    //     options?: IDatabaseFindOneOptions
-    // ): Promise<T> {
-    //     const user = this.userModel.findById(_id);
 
-    //     if (
-    //         options &&
-    //         options.populate &&
-    //         options.populate.role &&
-    //         options.populate.permission
-    //     ) {
-    //         user.populate({
-    //             path: 'role',
-    //             model: RoleEntity.name,
-    //             populate: {
-    //                 path: 'permissions',
-    //                 model: PermissionEntity.name,
-    //             },
-    //         });
-    //     } else if (options && options.populate && options.populate.role) {
-    //         user.populate({
-    //             path: 'role',
-    //             model: RoleEntity.name,
-    //         });
-    //     }
-
-    //     return user.lean();
-    // }
-
-    // async findOne<T>(
-    //     find?: Record<string, any>,
-    //     options?: IDatabaseFindOneOptions
-    // ): Promise<T> {
-    //     const user = this.userModel.findOne(find);
-
-    //     if (
-    //         options &&
-    //         options.populate &&
-    //         options.populate.role &&
-    //         options.populate.permission
-    //     ) {
-    //         user.populate({
-    //             path: 'role',
-    //             model: RoleEntity.name,
-    //             populate: {
-    //                 path: 'permissions',
-    //                 model: PermissionEntity.name,
-    //             },
-    //         });
-    //     } else if (options && options.populate && options.populate.role) {
-    //         user.populate({
-    //             path: 'role',
-    //             model: RoleEntity.name,
-    //         });
-    //     }
-
-    //     return user.lean();
-    // }
    
     async create({
         billDate,
@@ -154,89 +82,5 @@ export class BillService {
         bill.lastName = moment().format();
         const billUpdate = await bill.save();
         return billUpdate
-    }
-
-    // async checkExist(
-    //     email: string,
-    //     mobileNumber: string,
-    //     _id?: string
-    // ): Promise<IUserCheckExist> {
-    //     const existEmail: Record<string, any> = await this.userModel.exists({
-    //         email: {
-    //             $regex: new RegExp(email),
-    //             $options: 'i',
-    //         },
-    //         _id: { $nin: [new Types.ObjectId(_id)] },
-    //     });
-
-    //     const existMobileNumber: Record<string, any> =
-    //         await this.userModel.exists({
-    //             mobileNumber,
-    //             _id: { $nin: [new Types.ObjectId(_id)] },
-    //         });
-
-    //     return {
-    //         email: existEmail ? true : false,
-    //         mobileNumber: existMobileNumber ? true : false,
-    //     };
-    // }
-
-    // async updatePhoto(_id: string, aws: IAwsS3): Promise<UserDocument> {
-    //     const user: UserDocument = await this.userModel.findById(_id);
-    //     user.photo = aws;
-
-    //     return user.save();
-    // }
-
-    // async createRandomFilename(): Promise<Record<string, any>> {
-    //     const filename: string = this.helperStringService.random(20);
-
-    //     return {
-    //         path: this.uploadPath,
-    //         filename: filename,
-    //     };
-    // }
-
-    // async updatePassword(
-    //     _id: string,
-    //     { salt, passwordHash, passwordExpired }: IAuthPassword
-    // ): Promise<UserDocument> {
-    //     const auth: UserDocument = await this.userModel.findById(_id);
-
-    //     auth.password = passwordHash;
-    //     auth.passwordExpired = passwordExpired;
-    //     auth.salt = salt;
-
-    //     return auth.save();
-    // }
-
-    // async updatePasswordExpired(
-    //     _id: string,
-    //     passwordExpired: Date
-    // ): Promise<UserDocument> {
-    //     const auth: UserDocument = await this.userModel.findById(_id);
-    //     auth.passwordExpired = passwordExpired;
-
-    //     return auth.save();
-    // }
-
-    // async inactive(_id: string): Promise<UserDocument> {
-    //     const user: UserDocument = await this.userModel.findById(_id);
-
-    //     user.isActive = false;
-    //     return user.save();
-    // }
-
-    // async active(_id: string): Promise<UserDocument> {
-    //     const user: UserDocument = await this.userModel.findById(_id);
-
-    //     user.isActive = true;
-    //     return user.save();
-    // }
-
-    // async payloadSerialization(
-    //     data: IUserDocument
-    // ): Promise<UserPayloadSerialization> {
-    //     return plainToInstance(UserPayloadSerialization, data);
-    // }
+    }  
 }
