@@ -6,14 +6,11 @@ import {
 
 export class BillCreateDto {
 
-
     @IsNotEmpty()
     readonly billStatus: string;
 
-    
     @Type(() => Date)
     readonly billDate: Date;
-
 
     @IsNotEmpty()
     readonly unitConsume: number;
