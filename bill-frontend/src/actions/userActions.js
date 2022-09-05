@@ -23,7 +23,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/users/login",
+      "/api/v1/user/login",
       { email, password },
       config
     );
@@ -47,7 +47,8 @@ export const logout = () => async (dispatch) => {
   dispatch({ type: USER_LOGOUT });
 };
 
-export const register = (name, email, password, pic) => async (dispatch) => {
+export const register = (email, password ,firstName, lastName, mobileNumber) => async (dispatch) => {
+  console.log(email, password ,firstName, lastName, mobileNumber);
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
 
@@ -58,8 +59,8 @@ export const register = (name, email, password, pic) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      "/api/users",
-      { name, pic, email, password },
+      "/api/v1/public/user/sign-up",
+      { email, password ,firstName, lastName, mobileNumber},
       config
     );
 

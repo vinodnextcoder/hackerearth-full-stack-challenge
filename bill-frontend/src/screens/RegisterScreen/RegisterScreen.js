@@ -10,48 +10,52 @@ import "./RegisterScreen.css";
 
 function RegisterScreen({ history }) {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [pic, setPic] = useState(
-    "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-  );
+  const [firstName, setfirstName] = useState("");
+  const [mobileNumber, setmobileNumber] = useState("");
+  
+  // const [name, setName] = useState("");
+  const [lastName, setlastName] = useState("");
+  // const [pic, setPic] = useState(
+  //   "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+  // );
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
-  const [picMessage, setPicMessage] = useState(null);
+  // const [picMessage, setPicMessage] = useState(null);
 
   const dispatch = useDispatch();
 
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  const postDetails = (pics) => {
-    if (
-      pics ===
-      "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-    ) {
-      return setPicMessage("Please Select an Image");
-    }
-    setPicMessage(null);
-    if (pics.type === "image/jpeg" || pics.type === "image/png") {
-      const data = new FormData();
-      data.append("file", pics);
-      data.append("upload_preset", "notezipper");
-      data.append("cloud_name", "piyushproj");
-      fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
-        method: "post",
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setPic(data.url.toString());
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      return setPicMessage("Please Select an Image");
-    }
-  };
+  // const postDetails = (pics) => {
+  //   if (
+  //     pics ===
+  //     "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+  //   ) {
+  //     return setPicMessage("Please Select an Image");
+  //   }
+  //   setPicMessage(null);
+  //   if (pics.type === "image/jpeg" || pics.type === "image/png") {
+  //     const data = new FormData();
+  //     data.append("file", pics);
+  //     data.append("upload_preset", "notezipper");
+  //     data.append("cloud_name", "piyushproj");
+  //     fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
+  //       method: "post",
+  //       body: data,
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setPic(data.url.toString());
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   } else {
+  //     return setPicMessage("Please Select an Image");
+  //   }
+  // };
 
   useEffect(() => {
     if (userInfo) {
@@ -64,7 +68,7 @@ function RegisterScreen({ history }) {
 
     if (password !== confirmpassword) {
       setMessage("Passwords do not match");
-    } else dispatch(register(name, email, password, pic));
+    } else dispatch(register( email, password, firstName, lastName, mobileNumber));
   };
 
   return (
@@ -74,13 +78,33 @@ function RegisterScreen({ history }) {
         {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
         {loading && <Loading />}
         <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name">
-            <Form.Label>Name</Form.Label>
+          <Form.Group controlId="mobileNumber">
+            <Form.Label>Mobile Number</Form.Label>
             <Form.Control
-              type="name"
-              value={name}
-              placeholder="Enter name"
-              onChange={(e) => setName(e.target.value)}
+              type="mobileNumber"
+              value={mobileNumber}
+              placeholder="Enter mobile Number"
+              onChange={(e) => setmobileNumber(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="firstName">
+            <Form.Label>first Name</Form.Label>
+            <Form.Control
+              type="firstName"
+              value={firstName}
+              placeholder="Enter firstName"
+              onChange={(e) => setfirstName(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="lastName">
+            <Form.Label>last Name</Form.Label>
+            <Form.Control
+              type="lastName"
+              value={lastName}
+              placeholder="Enter lastName"
+              onChange={(e) => setlastName(e.target.value)}
             />
           </Form.Group>
 
@@ -114,7 +138,7 @@ function RegisterScreen({ history }) {
             />
           </Form.Group>
 
-          {picMessage && (
+          {/* {picMessage && (
             <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
           )}
           <Form.Group controlId="pic">
@@ -126,7 +150,7 @@ function RegisterScreen({ history }) {
               label="Upload Profile Picture"
               custom
             />
-          </Form.Group>
+          </Form.Group> */}
 
           <Button variant="primary" type="submit">
             Register
