@@ -1,8 +1,9 @@
+import './not.css';
 import React, { useEffect } from "react";
-import { Accordion, Badge, Button, Card } from "react-bootstrap";
+import { Button} from "react-bootstrap";
 import MainScreen from "../../components/MainScreen";
 import { Link } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
 
 import { useDispatch, useSelector } from "react-redux";
 import { deleteNoteAction, listNotes } from "../../actions/notesActions";
@@ -14,6 +15,8 @@ function MyNotes({ history, search }) {
 
   const noteList = useSelector((state) => state.noteList);
   const { loading, error, notes } = noteList;
+  
+
 
   // const filteredNotes = notes.filter((note) =>
   //   note.title.toLowerCase().includes(search.toLowerCase())
@@ -57,7 +60,7 @@ function MyNotes({ history, search }) {
 
   return (
     <MainScreen title={`Welcome Back ${userInfo && userInfo.name}..`}>
-      {console.log(notes)}
+      {/* {console.log(notes)} */}
       <Link to="/createnote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
           Create new Note
@@ -69,68 +72,36 @@ function MyNotes({ history, search }) {
       )}
       {loading && <Loading />}
       {loadingDelete && <Loading />}
-      {notes &&
-        notes
-          .filter((filteredNote) =>
-            filteredNote.title.toLowerCase().includes(search.toLowerCase())
-          )
-          .reverse()
-          .map((note) => (
-            <Accordion>
-              <Card style={{ margin: 10 }} key={note._id}>
-                <Card.Header style={{ display: "flex" }}>
-                  <span
-                    // onClick={() => ModelShow(note)}
-                    style={{
-                      color: "black",
-                      textDecoration: "none",
-                      flex: 1,
-                      cursor: "pointer",
-                      alignSelf: "center",
-                      fontSize: 18,
-                    }}
-                  >
-                    <Accordion.Toggle
-                      as={Card.Text}
-                      variant="link"
-                      eventKey="0"
-                    >
-                      {note.title}
-                    </Accordion.Toggle>
-                  </span>
-
-                  <div>
-                    <Button href={`/note/${note._id}`}>Edit</Button>
+      <div className="App">
+      <table>
+      <tbody>
+        <tr>
+          <th>billStatus</th>
+          <th>amount</th>
+          <th>unitConsume</th>
+        </tr>
+        {notes && notes.map((val, key) => {
+          return (
+            <tr key={key}>
+              <td>{val.billStatus}</td>
+              <td>{val.amount}</td>
+              <td>{val.unitConsume}</td>
+              <td>
+              <Button href={`/note/${val._id}`}>Edit</Button>
                     <Button
                       variant="danger"
                       className="mx-2"
-                      onClick={() => deleteHandler(note._id)}
+                      onClick={() => deleteHandler(val._id)}
                     >
                       Delete
                     </Button>
-                  </div>
-                </Card.Header>
-                <Accordion.Collapse eventKey="0">
-                  <Card.Body>
-                    <h4>
-                      <Badge variant="success">
-                        Category - {note.category}
-                      </Badge>
-                    </h4>
-                    <blockquote className="blockquote mb-0">
-                      <ReactMarkdown>{note.content}</ReactMarkdown>
-                      <footer className="blockquote-footer">
-                        Created on{" "}
-                        <cite title="Source Title">
-                          {note.createdAt.substring(0, 10)}
-                        </cite>
-                      </footer>
-                    </blockquote>
-                  </Card.Body>
-                </Accordion.Collapse>
-              </Card>
-            </Accordion>
-          ))}
+                    </td>
+            </tr>
+          )
+        })}
+      </tbody>
+      </table>
+    </div>
     </MainScreen>
   );
 }

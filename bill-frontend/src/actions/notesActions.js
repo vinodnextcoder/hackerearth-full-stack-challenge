@@ -26,15 +26,15 @@ export const listNotes = () => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${userInfo.data.accessToken}`,
       },
     };
 
-    const { data } = await axios.get(`/api/notes`, config);
-
+    const { data } = await axios.get(`/api/v1/bill/list`, config);
+  
     dispatch({
       type: NOTES_LIST_SUCCESS,
-      payload: data,
+      payload: data.data,
     });
   } catch (error) {
     const message =
