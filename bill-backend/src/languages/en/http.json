@@ -22,7 +22,7 @@
         "payloadToLarge": "Payload To Large",
         "uriToLarge": "Uri To Large",
         "unsupportedMediaType": "Unsupported Media Type",
-        "unprocessableEntity": "Unprocessable Entity",
+        "unprocessableEntity": "Please validate input",
         "tooManyRequest": "Too Many Request"
     },
     "serverError": {
@@ -54,7 +54,7 @@
     "413": "Payload To Large",
     "414": "Uri To Large",
     "415": "Unsupported Media Type",
-    "422": "Unprocessable Entity",
+    "422": "Please validate input",
     "429": "Too Many Request",
 
     "500": "Internal Server Error",
