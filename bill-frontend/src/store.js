@@ -6,7 +6,7 @@ import {
   noteDeleteReducer,
   noteListReducer,
   noteUpdateReducer,
-} from "./reducers/notesReducers";
+} from "./reducers/billsReducers";
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -17,9 +17,9 @@ const reducer = combineReducers({
   noteList: noteListReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  noteCreate: noteCreateReducer,
+  createBill: noteCreateReducer,
   noteDelete: noteDeleteReducer,
-  noteUpdate: noteUpdateReducer,
+  billUpdate: noteUpdateReducer,
   userUpdate: userUpdateReducer,
 });
 

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import LandingPage from "./screens/LandingPage/LandingPage";
-import MyNotes from "./screens/MyNotes/MyNotes";
+import MyBills from "./screens/MyBills";
 import SingleNote from "./screens/SingleNote/SingleNote";
 import LoginScreen from "./screens/LoginScreen/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen/RegisterScreen";
@@ -24,7 +24,7 @@ function App() {
         <Route
           path="/mynotes"
           component={({ history }) => (
-            <MyNotes search={search} history={history} />
+            <MyBills search={search} history={history} />
           )}
         />
         <Route path="/note/:id" component={SingleNote} />

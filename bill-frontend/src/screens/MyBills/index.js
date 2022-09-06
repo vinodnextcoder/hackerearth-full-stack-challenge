@@ -1,21 +1,20 @@
-import './not.css';
+import './bill.css';
 import React, { useEffect } from "react";
-import { Button} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import MainScreen from "../../components/MainScreen";
 import { Link } from "react-router-dom";
-// import ReactMarkdown from "react-markdown";
 
 import { useDispatch, useSelector } from "react-redux";
 import { deleteNoteAction, listNotes } from "../../actions/notesActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 
-function MyNotes({ history, search }) {
+function MyBills({ history, search }) {
   const dispatch = useDispatch();
 
   const noteList = useSelector((state) => state.noteList);
-  const { loading, error, notes } = noteList;
-  
+  const { loading, error, bills } = noteList;
+
 
 
   // const filteredNotes = notes.filter((note) =>
@@ -32,11 +31,11 @@ function MyNotes({ history, search }) {
     success: successDelete,
   } = noteDelete;
 
-  const noteCreate = useSelector((state) => state.noteCreate);
-  const { success: successCreate } = noteCreate;
+  const createBill = useSelector((state) => state.createBill);
+  const { success: successCreate } = createBill;
 
-  const noteUpdate = useSelector((state) => state.noteUpdate);
-  const { success: successUpdate } = noteUpdate;
+  const billUpdate = useSelector((state) => state.billUpdate);
+  const { success: successUpdate } = billUpdate;
 
   useEffect(() => {
     dispatch(listNotes());
@@ -73,21 +72,21 @@ function MyNotes({ history, search }) {
       {loading && <Loading />}
       {loadingDelete && <Loading />}
       <div className="App">
-      <table>
-      <tbody>
-        <tr>
-          <th>billStatus</th>
-          <th>amount</th>
-          <th>unitConsume</th>
-        </tr>
-        {notes && notes.map((val, key) => {
-          return (
-            <tr key={key}>
-              <td>{val.billStatus}</td>
-              <td>{val.amount}</td>
-              <td>{val.unitConsume}</td>
-              <td>
-              <Button href={`/note/${val._id}`}>Edit</Button>
+        <table>
+          <tbody>
+            <tr>
+              <th>billStatus</th>
+              <th>amount</th>
+              <th>unitConsume</th>
+            </tr>
+            {bills && bills.map((val, key) => {
+              return (
+                <tr key={key}>
+                  <td>{val.billStatus}</td>
+                  <td>{val.amount}</td>
+                  <td>{val.unitConsume}</td>
+                  <td>
+                    <Button href={`/note/${val._id}`}>Edit</Button>
                     <Button
                       variant="danger"
                       className="mx-2"
@@ -95,15 +94,15 @@ function MyNotes({ history, search }) {
                     >
                       Delete
                     </Button>
-                    </td>
-            </tr>
-          )
-        })}
-      </tbody>
-      </table>
-    </div>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     </MainScreen>
   );
 }
 
-export default MyNotes;
+export default MyBills;
