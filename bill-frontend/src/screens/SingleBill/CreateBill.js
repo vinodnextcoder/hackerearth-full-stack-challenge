@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import MainScreen from "../../components/MainScreen";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createNoteAction } from "../../actions/notesActions";
+import { createNoteAction } from "../../actions/billsActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 import ReactMarkdown from "react-markdown";
@@ -10,59 +10,69 @@ import ReactMarkdown from "react-markdown";
 function CreateNote({ history }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
+
+  const [unitConsume, setunitConsume] = useState("");
+  const [billStatus, setbillStatus] = useState("");
+  // billStatus
+  // unitConsume
 
   const dispatch = useDispatch();
 
-  const noteCreate = useSelector((state) => state.noteCreate);
-  const { loading, error, note } = noteCreate;
+  const createBill = useSelector((state) => state.createBill);
+  const { loading, error, bill } = createBill;
 
-  console.log(note);
+  console.log(bill);
 
   const resetHandler = () => {
     setTitle("");
-    setCategory("");
     setContent("");
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createNoteAction(title, content, category));
-    if (!title || !content || !category) return;
+    dispatch(createNoteAction(unitConsume, billStatus));
+    if (!title || !billStatus)  return;
 
-    resetHandler();
+
     history.push("/mynotes");
   };
 
   useEffect(() => {}, []);
 
   return (
-    <MainScreen title="Create a Note">
+    <MainScreen title="Create a Bill">
       <Card>
-        <Card.Header>Create a new Note</Card.Header>
+        <Card.Header>Create a new Bill</Card.Header>
         <Card.Body>
           <Form onSubmit={submitHandler}>
             {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-            <Form.Group controlId="title">
-              <Form.Label>Title</Form.Label>
+         
+
+            <Form.Group controlId="unitConsume">
+              <Form.Label>unitConsume</Form.Label>
               <Form.Control
-                type="title"
-                value={title}
-                placeholder="Enter the title"
-                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                value={unitConsume}
+                placeholder="Enter the unitConsume"
+                onChange={(e) => setunitConsume(e.target.value)}
               />
+
             </Form.Group>
 
-            <Form.Group controlId="content">
-              <Form.Label>Content</Form.Label>
-              <Form.Control
-                as="textarea"
-                value={content}
-                placeholder="Enter the content"
-                rows={4}
-                onChange={(e) => setContent(e.target.value)}
-              />
+            <Form.Group controlId="setbillStatus">
+              <Form.Label>setbillStatus</Form.Label>
+              <Form.Control  type="select"
+                value={billStatus}
+                placeholder="Enter the unitConsume"
+                
+                onChange={(e) => setbillStatus(e.target.value)} as="select">
+      <option>Pending</option>
+      <option>Paid</option>
+    </Form.Control>
+              
             </Form.Group>
+            
+      
             {content && (
               <Card>
                 <Card.Header>Note Preview</Card.Header>
@@ -72,15 +82,7 @@ function CreateNote({ history }) {
               </Card>
             )}
 
-            <Form.Group controlId="content">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="content"
-                value={category}
-                placeholder="Enter the Category"
-                onChange={(e) => setCategory(e.target.value)}
-              />
-            </Form.Group>
+           
             {loading && <Loading size={50} />}
             <Button type="submit" variant="primary">
               Create Note

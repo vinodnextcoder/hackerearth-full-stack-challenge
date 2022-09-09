@@ -1,25 +1,26 @@
 import {
-  NOTES_UPDATE_REQUEST,
-  NOTES_UPDATE_SUCCESS,
-  NOTES_UPDATE_FAIL,
-  NOTES_CREATE_FAIL,
-  NOTES_CREATE_REQUEST,
-  NOTES_CREATE_SUCCESS,
-  NOTES_DELETE_FAIL,
-  NOTES_DELETE_REQUEST,
-  NOTES_DELETE_SUCCESS,
-  NOTES_LIST_FAIL,
-  NOTES_LIST_REQUEST,
-  NOTES_LIST_SUCCESS,
+
+  BILLS_LIST_REQUEST,
+  BILLS_LIST_SUCCESS,
+  BILLS_LIST_FAIL,
+  BILLS_CREATE_FAIL,
+  BILLS_CREATE_REQUEST,
+  BILLS_CREATE_SUCCESS,
+  BILLS_DELETE_FAIL,
+  BILLS_DELETE_REQUEST,
+  BILLS_DELETE_SUCCESS,
+  BILLS_UPDATE_FAIL,
+  BILLS_UPDATE_REQUEST,
+  BILLS_UPDATE_SUCCESS,
 } from "../constants/notesConstants";
 
 export const noteListReducer = (state = { bills: [] }, action) => {
   switch (action.type) {
-    case NOTES_LIST_REQUEST:
+    case BILLS_LIST_REQUEST:
       return { loading: true };
-    case NOTES_LIST_SUCCESS:
+    case BILLS_LIST_SUCCESS:
       return { loading: false, bills: action.payload };
-    case NOTES_LIST_FAIL:
+    case BILLS_LIST_FAIL:
       return { loading: false, error: action.payload };
 
     default:
@@ -27,13 +28,13 @@ export const noteListReducer = (state = { bills: [] }, action) => {
   }
 };
 
-export const noteCreateReducer = (state = {}, action) => {
+export const billCreateReducer = (state = {}, action) => {
   switch (action.type) {
-    case NOTES_CREATE_REQUEST:
+    case BILLS_CREATE_REQUEST:
       return { loading: true };
-    case NOTES_CREATE_SUCCESS:
+    case BILLS_CREATE_SUCCESS:
       return { loading: false, success: true };
-    case NOTES_CREATE_FAIL:
+    case BILLS_CREATE_FAIL:
       return { loading: false, error: action.payload };
 
     default:
@@ -43,11 +44,11 @@ export const noteCreateReducer = (state = {}, action) => {
 
 export const noteDeleteReducer = (state = {}, action) => {
   switch (action.type) {
-    case NOTES_DELETE_REQUEST:
+    case BILLS_DELETE_REQUEST:
       return { loading: true };
-    case NOTES_DELETE_SUCCESS:
+    case BILLS_DELETE_SUCCESS:
       return { loading: false, success: true };
-    case NOTES_DELETE_FAIL:
+    case BILLS_DELETE_FAIL:
       return { loading: false, error: action.payload, success: false };
 
     default:
@@ -55,13 +56,13 @@ export const noteDeleteReducer = (state = {}, action) => {
   }
 };
 
-export const noteUpdateReducer = (state = {}, action) => {
+export const billUpdateReducer = (state = {}, action) => {
   switch (action.type) {
-    case NOTES_UPDATE_REQUEST:
+    case BILLS_UPDATE_REQUEST:
       return { loading: true };
-    case NOTES_UPDATE_SUCCESS:
+    case BILLS_UPDATE_SUCCESS:
       return { loading: false, success: true };
-    case NOTES_UPDATE_FAIL:
+    case BILLS_UPDATE_FAIL:
       return { loading: false, error: action.payload, success: false };
 
     default:

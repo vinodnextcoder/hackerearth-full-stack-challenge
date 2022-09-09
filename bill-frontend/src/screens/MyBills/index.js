@@ -5,7 +5,7 @@ import MainScreen from "../../components/MainScreen";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { deleteNoteAction, listNotes } from "../../actions/notesActions";
+import { deleteNoteAction, listNotes } from "../../actions/billsActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 
@@ -13,6 +13,7 @@ function MyBills({ history, search }) {
   const dispatch = useDispatch();
 
   const noteList = useSelector((state) => state.noteList);
+  console.log(noteList)
   const { loading, error, bills } = noteList;
 
 
