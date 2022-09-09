@@ -3,7 +3,7 @@ import MainScreen from "../../components/MainScreen";
 import axios from "axios";
 import { Button, Card, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteNoteAction, updateNoteAction } from "../../actions/notesActions";
+import { deleteNoteAction, updateNoteAction } from "../../actions/billsActions";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
 import ReactMarkdown from "react-markdown";
@@ -16,8 +16,8 @@ function SingleNote({ match, history }) {
 
   const dispatch = useDispatch();
 
-  const noteUpdate = useSelector((state) => state.noteUpdate);
-  const { loading, error } = noteUpdate;
+  const billUpdate = useSelector((state) => state.billUpdate);
+  const { loading, error } = billUpdate;
 
   const noteDelete = useSelector((state) => state.noteDelete);
   const { loading: loadingDelete, error: errorDelete } = noteDelete;
@@ -58,9 +58,9 @@ function SingleNote({ match, history }) {
   };
 
   return (
-    <MainScreen title="Edit Note">
+    <MainScreen title="Edit Bill">
       <Card>
-        <Card.Header>Edit your Note</Card.Header>
+        <Card.Header>Bill your Note</Card.Header>
         <Card.Body>
           <Form onSubmit={updateHandler}>
             {loadingDelete && <Loading />}

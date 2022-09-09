@@ -57,7 +57,7 @@ export class BillController {
             availableSearch,
         }: BillListDto
     ): Promise<IResponsePaging> {
-        console.log(page, perPage);
+        
         const skip: number = await this.paginationService.skip(page, perPage);
         const find: Record<string, any> = {
             ...search,
