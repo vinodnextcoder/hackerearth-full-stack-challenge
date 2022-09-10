@@ -141,6 +141,9 @@ export class BillController {
         @Param('id') id
     ): Promise<IResponse> {
         try {
+            console.log(body)
+            body.amount=     Number(body.unitConsume) *2;
+            console.log(body)
             await this.billService.updateOneById(id, body);
         } catch (err: any) {
             throw new InternalServerErrorException({

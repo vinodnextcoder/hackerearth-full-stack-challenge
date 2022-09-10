@@ -78,12 +78,13 @@ export class BillService {
 
     async updateOneById(
         _id: string,
-        { billStatus}: any
+        body : any
     ): Promise<any> {
-        const bill: any = await this.billModel.findById(_id);
-        bill.billStatus = billStatus;
-        bill.lastName = moment().format();
-        const billUpdate = await bill.save();
-        return billUpdate
+        const filter = { _id: _id };
+      const update = body;
+
+     let doc = await this.billModel.findOneAndUpdate(filter, update);
+       console.log(doc);  
+        return doc
     }  
 }

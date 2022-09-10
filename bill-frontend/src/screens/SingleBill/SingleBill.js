@@ -73,7 +73,7 @@ function SingleNote({ match, history }) {
   return (
     <MainScreen title="Edit Bill">
       <Card>
-        <Card.Header>Bill your Note</Card.Header>
+        <Card.Header>Bill Details</Card.Header>
         <Card.Body>
           <Form onSubmit={updateHandler}>
             {loadingDelete && <Loading />}
@@ -82,7 +82,7 @@ function SingleNote({ match, history }) {
               <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
             )}
             <Form.Group controlId="unitConsume">
-              <Form.Label>Unit</Form.Label>
+              <Form.Label>Unit Consume</Form.Label>
               <Form.Control
                 type="title"
                 placeholder="Enter the Unit"
@@ -92,7 +92,7 @@ function SingleNote({ match, history }) {
             </Form.Group>
 
             <Form.Group controlId="amount">
-              <Form.Label>Title</Form.Label>
+              <Form.Label>Amount</Form.Label>
               <Form.Control
                 type="title"
                 placeholder="Enter the amount"
