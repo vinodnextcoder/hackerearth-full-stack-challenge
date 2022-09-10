@@ -110,7 +110,7 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/notes/${id}`, config);
+    const { data } = await axios.delete(`/api/v1/bill/update/${id}`, config);
 
     dispatch({
       type: BILLS_DELETE_SUCCESS,
@@ -128,7 +128,7 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
   }
 };
 
-export const updateNoteAction = (id, title, content, category) => async (
+export const updateNoteAction = (id,  amount, billStatus, unitConsume) => async (
   dispatch,
   getState
 ) => {
@@ -149,8 +149,8 @@ export const updateNoteAction = (id, title, content, category) => async (
     };
 
     const { data } = await axios.put(
-      `/api/notes/${id}`,
-      { title, content, category },
+      `/api/v1/bill/update/${id}`,
+      { amount, billStatus, unitConsume },
       config
     );
 
