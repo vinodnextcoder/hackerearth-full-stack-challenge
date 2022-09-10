@@ -6,13 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteNoteAction, updateNoteAction } from "../../actions/billsActions";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
 
 function SingleNote({ match, history }) {
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
-  const [category, setCategory] = useState();
+  
   const [date, setDate] = useState("");
+  const [unitConsume, setunitConsume] = useState("");
+  const [billStatus, setbillStatus] = useState("");
+  const [amount, setAmount] = useState("");
 
   const dispatch = useDispatch();
 
@@ -31,27 +32,39 @@ function SingleNote({ match, history }) {
 
   useEffect(() => {
     const fetching = async () => {
-      const { data } = await axios.get(`/api/notes/${match.params.id}`);
+      const userInfo = localStorage.getItem('userInfo')
 
-      setTitle(data.title);
-      setContent(data.content);
-      setCategory(data.category);
-      setDate(data.updatedAt);
+      let tokenData = JSON.parse(userInfo);
+      // console.log(tokenData.data.accessToken)
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${tokenData.data.accessToken}`,
+        },
+      };
+      const { data } = await axios.get(`/api/v1/bill/${match.params.id}`, config);
+    
+
+      setunitConsume(data.data.unitConsume || "");
+      setAmount(data.data.amount || "");
+      setbillStatus(data.data.billStatus|| "");
+      setDate(data.data.updatedAt || "");
     };
 
     fetching();
   }, [match.params.id, date]);
 
   const resetHandler = () => {
-    setTitle("");
-    setCategory("");
-    setContent("");
+    setunitConsume("");
+    setAmount("");
+    setbillStatus("");
+
   };
 
   const updateHandler = (e) => {
     e.preventDefault();
-    dispatch(updateNoteAction(match.params.id, title, content, category));
-    if (!title || !content || !category) return;
+    dispatch(updateNoteAction(match.params.id, amount, billStatus, unitConsume));
+    if (!amount || !billStatus || !unitConsume) return;
 
     resetHandler();
     history.push("/mynotes");
@@ -68,47 +81,42 @@ function SingleNote({ match, history }) {
             {errorDelete && (
               <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
             )}
-            <Form.Group controlId="title">
+            <Form.Group controlId="unitConsume">
+              <Form.Label>Unit</Form.Label>
+              <Form.Control
+                type="title"
+                placeholder="Enter the Unit"
+                value={unitConsume}
+                onChange={(e) => setunitConsume(e.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="amount">
               <Form.Label>Title</Form.Label>
               <Form.Control
                 type="title"
-                placeholder="Enter the title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Enter the amount"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
               />
             </Form.Group>
 
-            <Form.Group controlId="content">
-              <Form.Label>Content</Form.Label>
-              <Form.Control
-                as="textarea"
-                placeholder="Enter the content"
-                rows={4}
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-              />
+            <Form.Group controlId="billStatus">
+              <Form.Label>setbillStatus</Form.Label>
+              <Form.Control 
+                type="select"
+                value={billStatus}
+            
+                onChange={(e) => setbillStatus(e.target.value)} as="select">
+                <option>Pending</option>
+                <option>Paid</option>
+              </Form.Control>
             </Form.Group>
-            {content && (
-              <Card>
-                <Card.Header>Note Preview</Card.Header>
-                <Card.Body>
-                  <ReactMarkdown>{content}</ReactMarkdown>
-                </Card.Body>
-              </Card>
-            )}
 
-            <Form.Group controlId="content">
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                type="content"
-                placeholder="Enter the Category"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-              />
-            </Form.Group>
+
             {loading && <Loading size={50} />}
             <Button variant="primary" type="submit">
-              Update Note
+              Update Bill
             </Button>
             <Button
               className="mx-2"

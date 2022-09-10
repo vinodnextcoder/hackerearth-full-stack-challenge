@@ -154,4 +154,28 @@ export class BillController {
         };
     }
 
+
+    @Response('bill.get')
+    @AuthAdminJwtGuard(
+        ENUM_AUTH_PERMISSIONS.USER_READ
+    )
+    @Get('/:id')
+    async GetBill(
+        @Param('id') id
+    ): Promise<any> {
+        let result;
+        try {
+            result= await this.billService.findOne(id);
+        } catch (err: any) {
+            throw new InternalServerErrorException({
+                statusCode: ENUM_ERROR_STATUS_CODE_ERROR.ERROR_UNKNOWN,
+                message: 'http.serverError.internalServerError',
+                error: err.message,
+            });
+        }
+        return {
+            ...result._doc
+        };
+    }
+
 }
