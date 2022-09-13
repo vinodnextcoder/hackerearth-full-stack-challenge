@@ -192,7 +192,7 @@ export class UserController {
             body.password,
             user.password
         );
-
+    
         if (!validate) {
             throw new BadRequestException({
                 statusCode:
@@ -255,6 +255,7 @@ export class UserController {
                 expiresIn,
                 accessToken,
                 refreshToken,
+                name:user.firstName,
             };
         }
 
@@ -267,6 +268,7 @@ export class UserController {
             expiresIn,
             accessToken,
             refreshToken,
+            name:user.firstName,
         };
     }
 
