@@ -65,9 +65,9 @@ export class BillService {
         return create.save();
     }
 
-    // async deleteOneById(_id: string): Promise<UserDocument> {
-    //     return this.userModel.findByIdAndDelete(_id);
-    // }
+    async deleteOneById(_id: string): Promise<any> {
+        return this.billModel.findByIdAndDelete(_id);
+    }
 
     // async deleteOne(find: Record<string, any>): Promise<UserDocument> {
     //     return this.userModel.findOneAndDelete(find);

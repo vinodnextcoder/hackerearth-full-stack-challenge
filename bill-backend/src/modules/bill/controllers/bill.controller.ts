@@ -7,7 +7,8 @@ import {
     Query,
     InternalServerErrorException,
     Param,
-    Req
+    Req,
+    Delete
 } from '@nestjs/common';
 import { ENUM_AUTH_PERMISSIONS } from 'src/common/auth/constants/auth.enum.permission.constant';
 import { AuthAdminJwtGuard } from 'src/common/auth/decorators/auth.jwt.decorator';
@@ -135,15 +136,12 @@ export class BillController {
     )
     @Put('/update/:id')
     async update(
-
         @Body()
         body: any,
         @Param('id') id
     ): Promise<IResponse> {
         try {
-            console.log(body)
-            body.amount=     Number(body.unitConsume) *2;
-            console.log(body)
+            body.amount= Number(body.unitConsume) *2;
             await this.billService.updateOneById(id, body);
         } catch (err: any) {
             throw new InternalServerErrorException({
@@ -180,5 +178,30 @@ export class BillController {
             ...result._doc
         };
     }
-
+  
+    @Response('bill.delete')
+    @AuthAdminJwtGuard(
+        ENUM_AUTH_PERMISSIONS.USER_READ,
+        ENUM_AUTH_PERMISSIONS.USER_UPDATE,
+        ENUM_AUTH_PERMISSIONS.USER_DELETE
+    )
+    @Delete('/delete/:id')
+    async delete(
+        @Body()
+        body: any,
+        @Param('id') id
+    ): Promise<IResponse> {
+        try {
+            let Record= await this.billService.deleteOneById(id);
+        } catch (err: any) {
+            throw new InternalServerErrorException({
+                statusCode: ENUM_ERROR_STATUS_CODE_ERROR.ERROR_UNKNOWN,
+                message: 'http.serverError.internalServerError',
+                error: err.message,
+            });
+        }
+        return {
+            message: 'Record Deleted Successfully',
+        };
+    }
 }
