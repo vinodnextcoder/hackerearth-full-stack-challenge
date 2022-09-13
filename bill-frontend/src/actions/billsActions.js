@@ -77,7 +77,7 @@ export const createNoteAction = (unitConsume, billStatus) => async (
       config
     );
 
-    console.log(data)
+  
     dispatch({
       type: BILLS_CREATE_SUCCESS,
       payload: data,
@@ -103,14 +103,15 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
     const {
       userLogin: { userInfo },
     } = getState();
-   console.log('-------',userInfo)
+   
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.data.accessToken}`,
       },
     };
 
-    const { data } = await axios.delete(`/api/v1/bill/update/${id}`, config);
+    const { data } = await axios.delete(`/api/v1/bill/delete/${id}`, config);
+    console.log(data)
 
     dispatch({
       type: BILLS_DELETE_SUCCESS,
