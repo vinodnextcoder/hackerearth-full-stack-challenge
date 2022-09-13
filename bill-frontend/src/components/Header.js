@@ -16,6 +16,7 @@ function Header({ setSearch }) {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
+  console.log('HEADER',userInfo);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -47,7 +48,7 @@ function Header({ setSearch }) {
               <>
                 <Nav.Link href="/mynotes">My Notes</Nav.Link>
                 <NavDropdown
-                  title={`${userInfo.name}`}
+                  title={`${userInfo.data.name}`}
                   id="collasible-nav-dropdown"
                 >
                   <NavDropdown.Item href="/profile">
