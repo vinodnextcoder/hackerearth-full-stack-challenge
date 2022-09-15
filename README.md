@@ -53,6 +53,10 @@ notice, you need client and server runs concurrently in different terminal sessi
 ```terminal
 $ cd client   // go to client folder
 $ npm i       // npm install packages
+
+before porject start please migrate command for roles
+
+$ npm run migrate
 $ npm run dev // run it locally
 
 // deployment for client app
@@ -62,3 +66,17 @@ $ npm run start // this will run the files in docs, this behavior is exactly the
 
 ## Server-side usage(PORT: 5000)
 ## Frontend-side usage(PORT: 3006)
+
+### Start
+
+```terminal
+$ cd server   // go to server folder
+$ npm i       // npm install packages
+$ npm run start // run it locally
+$ npm run build // this will build the server code to es5 js codes and generate a dist file
+
+```
+![picture alt](https://github.com/vinodnextcoder/hackerearth-full-stack-challenge/blob/main/register.png)
+![picture alt](https://github.com/vinodnextcoder/hackerearth-full-stack-challenge/blob/main/login.png)
+![picture alt](https://github.com/vinodnextcoder/hackerearth-full-stack-challenge/blob/main/list.png)
+![picture alt](https://github.com/vinodnextcoder/hackerearth-full-stack-challenge/blob/main/createBill.png)
