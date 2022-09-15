@@ -56,12 +56,16 @@ export class BillController {
             search,
             availableSort,
             availableSearch,
-        }: BillListDto
+        }: BillListDto,
+        @Req() request: Request
     ): Promise<IResponsePaging> {
+        let createdBy: any
+        createdBy = request.user
         
         const skip: number = await this.paginationService.skip(page, perPage);
         const find: Record<string, any> = {
             ...search,
+            createdBy: createdBy._id
         };
 
         const bills: IBillDocument[] = await this.billService.findAll(find, {

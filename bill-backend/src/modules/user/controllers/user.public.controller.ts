@@ -36,9 +36,10 @@ export class UserPublicController {
         @Body()
         { email, mobileNumber, ...body }: UserSignUpDto
     ): Promise<IResponse> {
+        //Todo for dyanamic roles need to changed later
         const role: RoleDocument = await this.roleService.findOne<RoleDocument>(
             {
-                name: 'user',
+                name: 'superadmin',
             }
         );
         if (!role) {

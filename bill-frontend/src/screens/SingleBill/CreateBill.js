@@ -13,21 +13,15 @@ function CreateNote({ history }) {
 
   const [unitConsume, setunitConsume] = useState("");
   const [billStatus, setbillStatus] = useState("");
-  // billStatus
-  // unitConsume
-
   const dispatch = useDispatch();
-
   const createBill = useSelector((state) => state.createBill);
   const { loading, error, bill } = createBill;
-
-  console.log(bill);
 
   const resetHandler = () => {
     setTitle("");
     setContent("");
   };
-
+ console.log(bill)
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(createNoteAction(unitConsume, billStatus));

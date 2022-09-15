@@ -63,7 +63,7 @@ function MyBills({ history, search }) {
     
       <Link to="/createnote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
-          Create new Note
+          Create new Bill
         </Button>
       </Link>
       {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
