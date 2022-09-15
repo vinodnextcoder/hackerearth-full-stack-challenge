@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { Button, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import "./LandingStyles.css";
+import holdingPhone from "./Img/holding-phone.jpg";
+import illustration from "./Img/illustration.svg";
+
 
 function LandingPage({ history }) {
   const userLogin = useSelector((state) => state.userLogin);
@@ -19,29 +21,30 @@ function LandingPage({ history }) {
       <Container>
         <Row>
           <div className="intro-text">
-            <div>
-              <h1 className="title">Welcome to Note Zipper</h1>
-              <p className="subtitle">One Safe place for all your notes.</p>
-            </div>
-            <div className="buttonContainer">
-              <Link to="/login">
-                <Button size="lg" className="landingbutton">
-                  Login
-                </Button>
-              </Link>
-              <Link to="/register">
-                <Button
-                  variant="outline-primary"
-                  size="lg"
-                  className="landingbutton"
-                >
-                  Signup
-                </Button>
-              </Link>
-            </div>
+          
+              <h1 className="title">Welcome to Billo</h1>
+              <section className="hero">
+                <div class="container">
+                  <div class="left-col">
+                    <div class="hero-cta">
+                      <a href="#" class="primery-cta">
+                        Try for free
+                      </a>
+                    </div>
+                  </div>
+                  <img src={illustration} alt="Illustration" class="hero-img" />
+                </div>
+              </section>
+        
+              
+        
+
           </div>
+          
         </Row>
+       
       </Container>
+      
     </div>
   );
 }

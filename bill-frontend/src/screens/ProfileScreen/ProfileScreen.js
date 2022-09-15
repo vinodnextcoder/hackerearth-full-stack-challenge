@@ -47,7 +47,7 @@ const ProfileScreen = ({ location, history }) => {
         .then((res) => res.json())
         .then((data) => {
           setPic(data.url.toString());
-          console.log(pic);
+        
         })
         .catch((err) => {
           console.log(err);
