@@ -67,9 +67,6 @@ $ npm run start // this will run the files in docs, this behavior is exactly the
 ## Server-side usage(PORT: 5000)
 ## Frontend-side usage(PORT: 3006)
 
- "JWT_SECRET=YOUR_JWT_SECRET" >> ./server/src/.env
-```
-
 ### Start
 
 ```terminal
