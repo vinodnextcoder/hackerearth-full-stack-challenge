@@ -6,8 +6,8 @@ import { HelperEncryptionService } from 'src/common/helper/services/helper.encry
 describe('HelperEncryptionService', () => {
     let helperEncryptionService: HelperEncryptionService;
     const audience = 'https://example.com';
-    const issuer = 'ack';
-    const subject = 'ack';
+    const issuer = 'test';
+    const subject = 'test';
     const data = 'aaaa';
     const dataObject = { test: 'aaaa' };
 
