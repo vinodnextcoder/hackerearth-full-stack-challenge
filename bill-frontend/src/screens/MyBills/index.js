@@ -13,7 +13,7 @@ function MyBills({ history, search }) {
   const dispatch = useDispatch();
 
   const noteList = useSelector((state) => state.noteList);
-  console.log(noteList)
+  
   const { loading, error, bills } = noteList;
 
 
@@ -60,7 +60,7 @@ function MyBills({ history, search }) {
 
   return (
     <MainScreen title={`Welcome Back ${userInfo && userInfo.data && userInfo.data.name}..`}>
-      {/* {console.log(notes)} */}
+    
       <Link to="/createnote">
         <Button style={{ marginLeft: 10, marginBottom: 6 }} size="lg">
           Create new Note

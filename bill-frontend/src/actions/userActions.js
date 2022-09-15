@@ -29,7 +29,7 @@ export const login = (email, password) => async (dispatch) => {
     );
 
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-    console.log(data)
+    
 
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
@@ -49,7 +49,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const register = (email, password ,firstName, lastName, mobileNumber) => async (dispatch) => {
-  console.log(email, password ,firstName, lastName, mobileNumber);
+  
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
 

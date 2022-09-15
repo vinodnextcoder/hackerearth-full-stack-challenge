@@ -35,8 +35,7 @@ function SingleNote({ match, history }) {
       const userInfo = localStorage.getItem('userInfo')
 
       let tokenData = JSON.parse(userInfo);
-      // console.log(tokenData.data.accessToken)
-
+      
       const config = {
         headers: {
           Authorization: `Bearer ${tokenData.data.accessToken}`,
