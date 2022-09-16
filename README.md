@@ -9,7 +9,7 @@ MongoDB, Expressjs, React/Redux, Nodejs
 
 > a fullstack implementation in MongoDB, nestjs, React/Redux, Nodejs.
 
-MERN stack is the idea of using Javascript/Node for fullstack web development.
+Full stack is the idea of using Javascript/Node for fullstack web development.
 
 
 
