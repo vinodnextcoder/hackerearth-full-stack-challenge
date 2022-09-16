@@ -2,7 +2,7 @@
 🌐 HackerEarth Full Stack Challenge 
 </h1>
 <p align="center">
-MongoDB, Expressjs, React/Redux, Nodejs
+MongoDB, Nestjs, React/Redux, Nodejs
 </p>
 
 
