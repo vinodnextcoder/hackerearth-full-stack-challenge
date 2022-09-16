@@ -31,11 +31,11 @@ $ npm install
 ```terminal
 LICENSE
 package.json
- server side bill-frontend/
+ server side bill-backend/
    package.json
    cp .env.example cp
    .env (to create .env, check [prepare your secret session])
-cliend side bill-backend/
+ Client side bill-frontend/
    package.json
 ...
 ```
@@ -54,7 +54,7 @@ notice, you need client and server runs concurrently in different terminal sessi
 $ cd client   // go to client folder
 $ npm i       // npm install packages
 
-before porject start please migrate command for roles
+before start project for backend  please run migrate command for roles
 
 $ npm run migrate
 $ npm run dev // run it locally
