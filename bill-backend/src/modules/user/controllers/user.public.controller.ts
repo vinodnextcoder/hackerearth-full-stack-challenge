@@ -118,6 +118,7 @@ export class UserPublicController {
                 });
 
             return {
+                name:body.firstName,
                 accessToken,
                 refreshToken,
             };
