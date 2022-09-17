@@ -5,8 +5,6 @@
 MongoDB, Nestjs, React/Redux, Nodejs
 </p>
 
-
-
 > a fullstack implementation in MongoDB, nestjs, React/Redux, Nodejs.
 
 Full stack is the idea of using Javascript/Node for fullstack web development.
