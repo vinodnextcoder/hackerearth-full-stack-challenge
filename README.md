@@ -38,7 +38,7 @@ package.json
 ...
 ```
 # import bill postman collection for endpoint
-- 1.create user account
+- 1. create user account
 - 2. login ang get token
 - 3. create bill add token into header
 - 4. get list add token in header 
