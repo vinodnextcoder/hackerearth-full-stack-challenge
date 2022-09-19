@@ -1,0 +1,263 @@
+{
+	"info": {
+		"_postman_id": "9519ed6b-acc7-4382-85b1-d292625e6d57",
+		"name": "Bill-crud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-custom-lang",
+						"value": "en",
+						"type": "default"
+					},
+					{
+						"key": "x-timestamp",
+						"value": "23",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"vndbha1qw2ws@sajmple.com\",\r\n  \"password\": \"Samplessword@123\",\r\n  \"firstName\":\"vinod\",\r\n   \"mobileNumber\":\"08115111123\",\r\n  \"lastName\":\"test\"\r\n \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/public/user/sign-up",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"public",
+						"user",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n       \"email\": \"vndbha1qw2ws@sajmple.com\",\r\n  \"password\": \"Samplessword@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create bill",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzI0MDE2ODUyMzJiNTE5ZTRiMmRlODYiLCJmaXJzdE5hbWUiOiJ2aW5vZCIsImxhc3ROYW1lIjoidGVzdCIsIm1vYmlsZU51bWJlciI6IjA4MTE1MTExMTIzIiwiZW1haWwiOiJ2bmRiaGExcXcyd3NAc2FqbXBsZS5jb20iLCJyb2xlIjp7Im5hbWUiOiJzdXBlcmFkbWluIiwicGVybWlzc2lvbnMiOltdLCJhY2Nlc3NGb3IiOiJTVVBFUl9BRE1JTiIsImlzQWN0aXZlIjp0cnVlfSwicGFzc3dvcmRFeHBpcmVkIjoiMjAyMy0wMy0xN1QwNDo1NDowMC40MjVaIiwiaXNBY3RpdmUiOnRydWUsImNyZWF0ZWRBdCI6IjIwMjItMDktMTZUMDQ6NTQ6MDAuNDQ0WiIsInJlbWVtYmVyTWUiOmZhbHNlLCJsb2dpbkRhdGUiOiIyMDIyLTA5LTE5VDExOjM3OjAwLjMxNFoiLCJpYXQiOjE2NjM1ODc0MjAsIm5iZiI6MTY2MzU4NzQyMCwiZXhwIjoxNjY1Mzg3NDIwLCJhdWQiOiJodHRwczovL2V4YW1wbGUuY29tIiwiaXNzIjoidGVzdCIsInN1YiI6InRlc3QifQ.7YIcZWl7PtffTgwAs-D4Rl9nK2UNSUUsCAMDq1KnYUY",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"unitConsume\":23,\r\n    \"amount\":23,\r\n    \"billStatus\":\"PENDING\",\r\n    \"customerId\":\"630cb07b0d5bc163743829a2\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/bill/createBill",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"bill",
+						"createBill"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update bill",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjYjA3YjBkNWJjMTYzNzQzODI5YTIiLCJmaXJzdE5hbWUiOiJ2aW5vZCIsImxhc3ROYW1lIjoidGVzdCIsIm1vYmlsZU51bWJlciI6IjA4MTExMTExMTIzIiwiZW1haWwiOiJ2bmRiaGF1MXF3dzJ3c0BzYWptcGxlLmNvbSIsInJvbGUiOnsibmFtZSI6ImFkbWluIiwicGVybWlzc2lvbnMiOlt7Im5hbWUiOiJwZXJtaXNzaW9uIHJlYWQiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlBFUk1JU1NJT05fUkVBRCJ9LHsibmFtZSI6InBlcm1pc3Npb24gdXBkYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJQRVJNSVNTSU9OX1VQREFURSJ9LHsibmFtZSI6InJvbGUgY3JlYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJST0xFX0NSRUFURSJ9LHsibmFtZSI6InJvbGUgZGVsZXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJST0xFX0RFTEVURSJ9LHsibmFtZSI6InJvbGUgcmVhZCIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiUk9MRV9SRUFEIn0seyJuYW1lIjoicm9sZSB1cGRhdGUiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlJPTEVfVVBEQVRFIn0seyJuYW1lIjoic2V0dGluZyByZWFkIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJTRVRUSU5HX1JFQUQifSx7Im5hbWUiOiJzZXR0aW5nIHVwZGF0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiU0VUVElOR19VUERBVEUifSx7Im5hbWUiOiJ1c2VyIGNyZWF0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9DUkVBVEUifSx7Im5hbWUiOiJ1c2VyIGRlbGV0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9ERUxFVEUifSx7Im5hbWUiOiJ1c2VyIGltcG9ydCIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9JTVBPUlQifSx7Im5hbWUiOiJ1c2VyIHJlYWQiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlVTRVJfUkVBRCJ9LHsibmFtZSI6InVzZXIgdXBkYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJVU0VSX1VQREFURSJ9XSwiYWNjZXNzRm9yIjoiQURNSU4iLCJpc0FjdGl2ZSI6dHJ1ZX0sInBhc3N3b3JkRXhwaXJlZCI6IjIwMjMtMDItMjdUMTI6MjY6MzUuNzU5WiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA4LTI5VDEyOjI2OjM1LjgzMVoiLCJyZW1lbWJlck1lIjpmYWxzZSwibG9naW5EYXRlIjoiMjAyMi0wOS0wMVQxNDo1NToxNS40MzNaIiwiaWF0IjoxNjYyMDQ0MTE1LCJuYmYiOjE2NjIwNDQxMTUsImV4cCI6MTY2Mzg0NDExNSwiYXVkIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsImlzcyI6ImFjayIsInN1YiI6ImFjayJ9.psQrThTJ1uFvEcrWBmDI9SNxML7cCa4W_f-leLdoLEc",
+						"type": "text"
+					},
+					{
+						"key": "x-custom-lang",
+						"value": "en",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"billStatus\":\"Paid\",\r\n    \"unitConsume\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/bill/update/6311af3ee38074ad7a1045d3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"bill",
+						"update",
+						"6311af3ee38074ad7a1045d3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Bill",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzI0MDE2ODUyMzJiNTE5ZTRiMmRlODYiLCJmaXJzdE5hbWUiOiJ2aW5vZCIsImxhc3ROYW1lIjoidGVzdCIsIm1vYmlsZU51bWJlciI6IjA4MTE1MTExMTIzIiwiZW1haWwiOiJ2bmRiaGExcXcyd3NAc2FqbXBsZS5jb20iLCJyb2xlIjp7Im5hbWUiOiJzdXBlcmFkbWluIiwicGVybWlzc2lvbnMiOltdLCJhY2Nlc3NGb3IiOiJTVVBFUl9BRE1JTiIsImlzQWN0aXZlIjp0cnVlfSwicGFzc3dvcmRFeHBpcmVkIjoiMjAyMy0wMy0xN1QwNDo1NDowMC40MjVaIiwiaXNBY3RpdmUiOnRydWUsImNyZWF0ZWRBdCI6IjIwMjItMDktMTZUMDQ6NTQ6MDAuNDQ0WiIsInJlbWVtYmVyTWUiOmZhbHNlLCJsb2dpbkRhdGUiOiIyMDIyLTA5LTE5VDExOjM3OjAwLjMxNFoiLCJpYXQiOjE2NjM1ODc0MjAsIm5iZiI6MTY2MzU4NzQyMCwiZXhwIjoxNjY1Mzg3NDIwLCJhdWQiOiJodHRwczovL2V4YW1wbGUuY29tIiwiaXNzIjoidGVzdCIsInN1YiI6InRlc3QifQ.7YIcZWl7PtffTgwAs-D4Rl9nK2UNSUUsCAMDq1KnYUY",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/bill/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"bill",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjYjA3YjBkNWJjMTYzNzQzODI5YTIiLCJmaXJzdE5hbWUiOiJ2aW5vZCIsImxhc3ROYW1lIjoidGVzdCIsIm1vYmlsZU51bWJlciI6IjA4MTExMTExMTIzIiwiZW1haWwiOiJ2bmRiaGF1MXF3dzJ3c0BzYWptcGxlLmNvbSIsInJvbGUiOnsibmFtZSI6ImFkbWluIiwicGVybWlzc2lvbnMiOlt7Im5hbWUiOiJwZXJtaXNzaW9uIHJlYWQiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlBFUk1JU1NJT05fUkVBRCJ9LHsibmFtZSI6InBlcm1pc3Npb24gdXBkYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJQRVJNSVNTSU9OX1VQREFURSJ9LHsibmFtZSI6InJvbGUgY3JlYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJST0xFX0NSRUFURSJ9LHsibmFtZSI6InJvbGUgZGVsZXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJST0xFX0RFTEVURSJ9LHsibmFtZSI6InJvbGUgcmVhZCIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiUk9MRV9SRUFEIn0seyJuYW1lIjoicm9sZSB1cGRhdGUiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlJPTEVfVVBEQVRFIn0seyJuYW1lIjoic2V0dGluZyByZWFkIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJTRVRUSU5HX1JFQUQifSx7Im5hbWUiOiJzZXR0aW5nIHVwZGF0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiU0VUVElOR19VUERBVEUifSx7Im5hbWUiOiJ1c2VyIGNyZWF0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9DUkVBVEUifSx7Im5hbWUiOiJ1c2VyIGRlbGV0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9ERUxFVEUifSx7Im5hbWUiOiJ1c2VyIGltcG9ydCIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9JTVBPUlQifSx7Im5hbWUiOiJ1c2VyIHJlYWQiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlVTRVJfUkVBRCJ9LHsibmFtZSI6InVzZXIgdXBkYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJVU0VSX1VQREFURSJ9XSwiYWNjZXNzRm9yIjoiQURNSU4iLCJpc0FjdGl2ZSI6dHJ1ZX0sInBhc3N3b3JkRXhwaXJlZCI6IjIwMjMtMDItMjdUMTI6MjY6MzUuNzU5WiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA4LTI5VDEyOjI2OjM1LjgzMVoiLCJyZW1lbWJlck1lIjpmYWxzZSwibG9naW5EYXRlIjoiMjAyMi0wOS0wMVQxNDo1NToxNS40MzNaIiwiaWF0IjoxNjYyMDQ0MTE1LCJuYmYiOjE2NjIwNDQxMTUsImV4cCI6MTY2Mzg0NDExNSwiYXVkIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsImlzcyI6ImFjayIsInN1YiI6ImFjayJ9.psQrThTJ1uFvEcrWBmDI9SNxML7cCa4W_f-leLdoLEc",
+						"type": "default"
+					},
+					{
+						"key": "x-custom-lang",
+						"value": "en",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"billStatus\":\"test\",\r\n    \"unitConsume\": 12\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/bill/delete/63178d74d020fdf90236fd07",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"bill",
+						"delete",
+						"63178d74d020fdf90236fd07"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Roles list",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzBjYjA3YjBkNWJjMTYzNzQzODI5YTIiLCJmaXJzdE5hbWUiOiJ2aW5vZCIsImxhc3ROYW1lIjoidGVzdCIsIm1vYmlsZU51bWJlciI6IjA4MTExMTExMTIzIiwiZW1haWwiOiJ2bmRiaGF1MXF3dzJ3c0BzYWptcGxlLmNvbSIsInJvbGUiOnsibmFtZSI6ImFkbWluIiwicGVybWlzc2lvbnMiOlt7Im5hbWUiOiJwZXJtaXNzaW9uIHJlYWQiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlBFUk1JU1NJT05fUkVBRCJ9LHsibmFtZSI6InBlcm1pc3Npb24gdXBkYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJQRVJNSVNTSU9OX1VQREFURSJ9LHsibmFtZSI6InJvbGUgY3JlYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJST0xFX0NSRUFURSJ9LHsibmFtZSI6InJvbGUgZGVsZXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJST0xFX0RFTEVURSJ9LHsibmFtZSI6InJvbGUgcmVhZCIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiUk9MRV9SRUFEIn0seyJuYW1lIjoicm9sZSB1cGRhdGUiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlJPTEVfVVBEQVRFIn0seyJuYW1lIjoic2V0dGluZyByZWFkIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJTRVRUSU5HX1JFQUQifSx7Im5hbWUiOiJzZXR0aW5nIHVwZGF0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiU0VUVElOR19VUERBVEUifSx7Im5hbWUiOiJ1c2VyIGNyZWF0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9DUkVBVEUifSx7Im5hbWUiOiJ1c2VyIGRlbGV0ZSIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9ERUxFVEUifSx7Im5hbWUiOiJ1c2VyIGltcG9ydCIsImlzQWN0aXZlIjp0cnVlLCJjb2RlIjoiVVNFUl9JTVBPUlQifSx7Im5hbWUiOiJ1c2VyIHJlYWQiLCJpc0FjdGl2ZSI6dHJ1ZSwiY29kZSI6IlVTRVJfUkVBRCJ9LHsibmFtZSI6InVzZXIgdXBkYXRlIiwiaXNBY3RpdmUiOnRydWUsImNvZGUiOiJVU0VSX1VQREFURSJ9XSwiYWNjZXNzRm9yIjoiQURNSU4iLCJpc0FjdGl2ZSI6dHJ1ZX0sInBhc3N3b3JkRXhwaXJlZCI6IjIwMjMtMDItMjdUMTI6MjY6MzUuNzU5WiIsImlzQWN0aXZlIjp0cnVlLCJjcmVhdGVkQXQiOiIyMDIyLTA4LTI5VDEyOjI2OjM1LjgzMVoiLCJyZW1lbWJlck1lIjpmYWxzZSwibG9naW5EYXRlIjoiMjAyMi0wOS0wMVQxNDo1NToxNS40MzNaIiwiaWF0IjoxNjYyMDQ0MTE1LCJuYmYiOjE2NjIwNDQxMTUsImV4cCI6MTY2Mzg0NDExNSwiYXVkIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsImlzcyI6ImFjayIsInN1YiI6ImFjayJ9.psQrThTJ1uFvEcrWBmDI9SNxML7cCa4W_f-leLdoLEc",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/admin/role/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"role",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
